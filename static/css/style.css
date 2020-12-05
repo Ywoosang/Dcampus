@@ -1,0 +1,12 @@
+body { 
+    position :relative; 
+}
+div{
+    width : 500px;
+    font-size: 30px;
+    height : 500px;
+    position :absolute;
+    left: 50%;
+    right :50%;
+    transform: translate(-50%,-50%); 
+}
