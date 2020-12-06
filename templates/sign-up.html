@@ -1,64 +1,50 @@
-<!doctype html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>회원가입</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <link href="../static/css/sign-up.css" rel="stylesheet"> -->
-    <!-- <style>
-        @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
-    </style> -->
-</head>
-<body>
-    <div class="container">
-        <nav>
-            <div></div>
-        </nav>
-        <section class="main">
-            <article class="top">
-                <form method="POST" action="/signup">
-                    <h1>회원가입</h1>
-                    <hr> 
-                    <label for="inputName">이름을 입력해주세요</label>
-                    <div class="input">
+{% extends "default.html" %}
+{% block title %}Dcampus>회원가입{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+{% endblock %}
+{% block main %}
+<div class="container">
+    <section class="main">
+        <article class="sign-in">
+            <form method="POST" action="/signup">
+                <h1>회원가입</h1>
+                <div class="input">
                     <span class="input-group-addon">
-                    <i class="fa fa-user "></i>
-                        </span>
-                        <input type="text" id="inputName" name="name" class="form-control" placeholder=" " required autofocus>
-                    </div>
-                    <label for="inputId">이메일을 입력 해주세요</label>
-                    <div class="input">
-                     <span class="input-group-addon">
+                        <i class="fa fa-user "></i>
+                    </span>
+                    <input type="text" id="inputName" name="name" class="form-control" placeholder=" " required
+                        autofocus>
+                </div>
+                <div class="input">
+                    <span class="input-group-addon">
                         <i class="fa fa-envelope"></i>
-                        </span>
-                        <input type="text" id="inputId" name="Id" class="form-control" placeholder="" required autofocus>
-                    </div>
-                    <label for="inputPassword">비밀번호를 입력해주세요</label>
-                    <div class="input">
-                        <span class="input-group-addon">
+                    </span>
+                    <input type="text" id="inputId" name="Id" class="form-control" placeholder="" required autofocus>
+                </div>
+                <div class="input">
+                    <span class="input-group-addon">
                         <i class="fa fa-lock"></i>
-                        </span>
-                        <input type="password" id="inputPassword" name="passwd" class="form-control" placeholder="" required>
-                    </div>
-                    <div class ="button"> 
-                    <button  type="submit" id="submit">계정 만들기</button>
-                    <button type="button" id="cancel">취소</button> 
-                    </div>
-                </form>
-                {% for user in users %}
-                    <h4>
-                        {{ user.user_name }} <a href="/update/{{ user.id }}">Update</a> <a href="/delete/{{ user.id }}">delete</a>
-                    </h4>
-                {% endfor %}
-            </article>
-        </div>
-        </section>
-        <aside>
-            <div></div>
-        </aside>
-    </container>
-    <footer>
-        <p>COPYRIGHT &copy; Designd by yd_w_sang</p>
-    </footer>
-</body></html>
+                    </span>
+                    <input type="password" id="inputPassword" name="passwd" class="form-control" placeholder=""
+                        required>
+                </div>
+                <hr>
+                <div class="button">
+                    <button type="submit" class="submit">계정 만들기</button>
+                    <button type="button" class="cancel">취소</button>
+                </div>
+            </form>
+        </article>
+        <article class="bottom">
+            <div>개인정보처리방침</div>
+            <div><a>COPYRIGHT &copy; re designed by yd_w_sang</a></div>
+        </article>
+    </section>
+    {% for user in users %}
+    <h4>
+        {{ user.user_name }} <a href="/update/{{ user.id }}">Update</a> <a href="/delete/{{ user.id }}">delete</a>
+    </h4>
+    {% endfor %}
+</div>
+{% endblock %}

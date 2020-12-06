@@ -1,13 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
-</head>
-<body>
-    <div>성공했다.</div>
-    
-</body>
-</html>
+{% extends "default.html" %}
+{% block title %}Dcampus{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+{% block main %}
+<div class="wrapper">
+    <section class="main ">
+        <div class="main-title box">
+            <div class="title">
+                <p>경희대학교</p>
+                <p>D-Campus가</p>
+                <p>시작합니다.</p>
+            </div>
+        </div>
+        <div class="main-des box">
+            <div class="slider">
+                <div class="inner">
+                    <div class="icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <div class="inner-des">
+                        <h4>뭐부터 배울지 막막하시다구요? </h4>
+                        <p>개발자 입문부터 심화까지</p>
+                        <p>로드맵과 강좌를 제공해드려요</p>
+                    </div>
+                </div>
+                <div class="inner">
+                    <div class="icon">
+                        <i class="fa fa-list-alt"></i>
+                    </div>
+                    <div class="inner-des">
+                        <h4>프로젝트 계획을 짜기 막막하시다구요?</h4>
+                        <p>당신의 프로젝트를 체계적으로 도와줄</p>
+                        <p>프로젝트 메모장을 써보세요</p>
+                    </div>
+                </div>
+                <div class="inner">
+                    <div class="icon">
+                        <i class="fa fa-television"></i>
+                    </div>
+                    <div class="inner-des">
+                        <h4>오래 개발해서 허리가 아프시다구요?</h4>
+                        <p>잘못된 자세를 인식해서</p>
+                        <p>자세교정을 도와드려요</p>
+                    </div>
+                </div>
+                <div class="inner">
+                    <div class="icon">
+                        <i class="fa fa-link"></i>
+                    </div>
+                    <div class="inner-des">
+                        <h4>반복되는 검색, 이젠 지겨우신가요? </h4>
+                        <p>Stack overflow,Git hub,google </p>
+                        <p>링크를 모아 효율적으로 관리하세요!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-nav box">
+            <div class="go-roadmap">
+                <a @click="">
+                    <h5>Rodamap 가기</h5>
+                    <p>관련 강좌 제공</p>
+                </a>
+            </div>
+            <div class="go-main">
+                <a href="/">
+                    <i style="color:white; font-size:60px; margin-bottom: 10px;" class="fa fa-university"></i>
+                    <h5>d-campus 가기</h5>
+                    <p>(온라인 학습실)</p>
+                </a>
+            </div>
+            <div class="go-project">
+                <a href="/">
+                    <p style="text-align: left;">project</p>
+                    <h5>진행목록 보기</h5>
+                </a>
+            </div>
+            <div class="go-link">
+                <a href="/">
+                    <h5>link 저장소 가기</h5>
+                    <p>(개인별)</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    <h1 class="warn">웹 전체화면에서 보시오.</h1>
+</div>
+{% endblock %}
+ 
+{% block script %}
+<script>
+    $('.slider').slick({
+        infinite: true,
+        slidesToShow: 3,
+        dots: true,
+        vertical: true,
+        autoplay: true
+    }); 
+</script>
+{% endblock %}
