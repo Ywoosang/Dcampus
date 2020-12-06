@@ -107,7 +107,8 @@ def delete(id):
     except Exception as e :
             print("error :", e)
             return
-app.run(debug=True)
+ 
+
 
 #Create a function return a string when we add 
 
