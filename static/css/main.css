@@ -111,6 +111,7 @@ button {
     align-items: center;
     justify-content : center;
     text-align: center; 
+    cursor: pointer;
 }
 .main-nav div a p{
     font-size: 13px;

@@ -1,5 +1,5 @@
 var vm = new Vue({
-    el : "#app-total",
+    el : "#app",
     delimiters:['${', '}'],
     data : {
         // server data 
@@ -12,7 +12,7 @@ var vm = new Vue({
     methods : {
         isLogin : function(){
             var vm = this
-            axios.post(`${window.origin}/datemaker/main/usercheck`)
+            axios.post(`${window.origin}/main/usercheck`)
             .then((response)=>{ 
                 var name = response.data['name']; 
                 console.log(name);
@@ -26,22 +26,32 @@ var vm = new Vue({
                 console.log(error); 
             }) 
         },
-        goProfile : function(){
+        goProject : function(){
             if(this.login === true){
-                window.location.href= `${window.origin}/datemaker/profile`;
+                window.location.href= `${window.origin}/project`;
             }else{
                 alert('로그인해주세요') 
+                window.location.href= `${window.origin}/login`;
             }
         },
-        goCart : function(){
+        goDcampus : function(){
             if(this.login === true){
-                window.location.href= `${window.origin}/datemaker/cart`;
+                window.location.href= `${window.origin}/main`;
             }else{
                 alert('로그인해주세요')
+                window.location.href= `${window.origin}/login`;
+            }
+        },
+        goRoadmap : function(){
+            if(this.login === true){
+                window.location.href= `${window.origin}/roadmap`;
+            }else{
+                alert('로그인해주세요') 
+                window.location.href= `${window.origin}/login`;
             }
         },
         logout : function(){
-            axios.get('/datemaker/logout')
+            axios.get('/logout')
             .then((response)=>{
                 alert('로그아웃 되었습니다.')
                 window.location.href= `${window.origin}/`; 

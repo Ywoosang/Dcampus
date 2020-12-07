@@ -4,25 +4,25 @@ from flask import (
     request,
     redirect,
     url_for,
-
+    session,
+    make_response,
+    g,
+    jsonify
 )
+from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy 
-app = Flask(__name__)
-# ///는 상대경로를 나타내는 것임 데이터 베이스 파일이 sitting 되는  /// 데이터 베이스 이름
- 
-# Initialize the database
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # warining message doesn't appear 
-# 상대 경로로 app 과 같은 경로상에 놓임 
+from flask_cors import CORS
+
+app = Flask(__name__,static_url_path='/static')
+
+CORS(app) 
+app.config.update(
+    SECRET_KEY ="woosangyoon1234",
+    SESSION_COOKIE_NAME="User_cookie"
+)
 app.config['SQLALCHEMY_DATABASE_URI']  = 'sqlite:///dcampus.db' 
 db = SQLAlchemy(app)
-# db 생성
-# bash 기준(winpty)  python
-# db.create_all()  
-# exit() 
-# 테이블 확인하는 방법
-# sqlite3 db.dcampus 
-#Create table in the database 
-#db.Model : db 변수에 연결. table 생성 
+ 
 class Users(db.Model):
     id = db.Column(db.Integer,primary_key=True) 
     user_id = db.Column(db.String(200),nullable=False)  #db 아이디 정수로
@@ -30,6 +30,32 @@ class Users(db.Model):
     user_passwd = db.Column(db.String(300),nullable=False)
     def __repr__(self):
         return '<Name %r>' % self.user_id
+
+class Clients :
+    users = [] 
+
+@app.before_request
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=2)
+    g.user = None
+    if 'user_id' in session:
+        user_list = [x for x in Clients.users if x.user_id == session['user_id']]
+        if user_list != [] : 
+            g.user = user_list[0]  # use 에 append 된건 이름,아이디,비번이 넣어진 User 인스턴스임
+            print("<name:" + g.user.user_name)
+
+@app.route('/main/usercheck',methods=["POST"])
+def userCheck():
+    print("데이터 보내짐")
+    if not g.user: 
+        name = 'guest'
+    else :
+        name = str(g.user.user_name)
+    response = {
+        'name' : name
+    }
+    return make_response(jsonify(response),200) 
 
 @app.route('/')
 def root():
@@ -42,24 +68,25 @@ def login():
         user_passwd = request.form.get('passwd')
         User = Users.query.filter_by(user_id=user_id).first() #Users 클래스 객체로 가져옴
         if User != None : 
-            print("이미 있는 사람임") 
             if user_id == User.user_id and user_passwd == User.user_passwd:
+                session['user_id'] = User.user_id 
+                Clients.users.append(User)
                 return redirect(url_for('root'))
         makeAlert ="""<script>alert("로그인 오류")</script>""" 
         return render_template("login.html",makeAlert=makeAlert)
     return render_template('login.html')
 
+@app.route('/project')
+def project():
+    return render_template('plan.html') 
 
-# @app.before_request
-# def before_request():
-#     session.permanent = True
-#     app.permanent_session_lifetime = timedelta(minutes=30)
-#     g.user = None
-#     if 'user_id' in session:
-#         user_list = [x for x in User.users if x.id == session['user_id']]
-#         if user_list != [] : 
-#             g.user = user_list[0]  # use 에 append 된건 이름,아이디,비번이 넣어진 User 인스턴스임
-#             print(g.user.id)
+@app.route('/roadmap')
+def roadmap():
+    return render_template('roadmap.html') 
+
+@app.route('/main')
+def main():
+    return render_template('main.html') 
 
 
 #유효성 검사를 통해 사전에 에러 방지할 것

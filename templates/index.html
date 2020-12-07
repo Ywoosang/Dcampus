@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
 {% block main %}
-<div class="wrapper">
+<div class="wrapper" id=app>
     <section class="main ">
         <div class="main-title box">
             <div class="title">
@@ -59,7 +59,7 @@
         </div>
         <div class="main-nav box">
             <div class="go-roadmap">
-                <a @click="">
+                <a @click="goRoadmap">
                     <h5>Rodamap 가기</h5>
                     <p>관련 강좌 제공</p>
                 </a>
@@ -72,7 +72,7 @@
                 </a>
             </div>
             <div class="go-project">
-                <a href="/">
+                <a @click="goProject">
                     <p style="text-align: left;">project</p>
                     <h5>진행목록 보기</h5>
                 </a>
@@ -88,8 +88,8 @@
     <h1 class="warn">웹 전체화면에서 보시오.</h1>
 </div>
 {% endblock %}
- 
 {% block script %}
+<script src="{{ url_for('static',filename='js/default.js') }}"> </script>
 <script>
     $('.slider').slick({
         infinite: true,

@@ -13,11 +13,12 @@
 </head>
 <body>
     <p style="position:absolute;">{{ makeAlert | safe }} </p> 
+    <div class="app-main">
     {% block main %}{% endblock %}
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- <script src="{{ url_for('static', filename='js/js/default.js') }}"> </script> -->
     {% block script %}{% endblock %}
 </body></html>

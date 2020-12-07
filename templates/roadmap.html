@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>디캠퍼스 로드맵</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/roadmap.css') }}">
+    <link href="../static/css/roadmap.css" rel="stylesheet">
+    <style>
+        @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <div id="home">
+                <i class="fa fa-home"></i>
+            </div> 
+            <div id="logo"></div> 
+        </div>
+    </header>
+
+    <!--Road Map-->
+    <h1 id="title">로드맵</h1>
+
+    <article class="wholeWrap">
+
+        <!--Tab-->
+        <div class="tab">
+            <div class="btn1 js-btn1">웹 개발 기초</div>
+            <div class="btn2 js-btn2">프런트엔드</div>
+            <div class="btn3 js-btn3">백엔드</div>
+            <div class="btn4 js-btn4">데브옵스</div>
+        </div>
+
+        <!--Main Content-->
+        <main>
+
+            <!--Common-->
+            <div class="commonWrap js-commonWrap grid">
+                <div class="gridBlock">
+                    <h1>HTML</h1>
+                    <p>웹 페이지를 위한 마크업 언어</p>
+                    <div class="links">
+                        <a href="https://www.inflearn.com/course/html-%EA%B8%B0%EC%B4%88#" target="_blank">생활코딩 - HTML 기초</a>
+                        <a href="https://www.inflearn.com/course/html-%EA%B8%B0%EB%B3%B8#" target="_blank">기본을 확실히!! HTML 의 모든것</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>Git</h1>
+                    <p>소프트웨어 버전 관리를 위한 시스템</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=FXDjmsiv8fI" target="_blank">가장 쉬운 Git 강좌 - (상) 혼자작업편</a>
+                        <a href="https://www.youtube.com/watch?v=XUEuYq64HKI" target="_blank">Git : 버전관리란 무엇일까요?</a>
+                        <a href="https://www.youtube.com/watch?v=XUEuYq64HKI" target="_blank">지옥에서 온 Git</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>GitHub</h1>
+                    <p>깃(Git)을 사용하는 프로젝트를 지원하는 웹 호스팅 서비스</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/playlist?list=PLuHgQVnccGMBXv1OKe3Hn3Jq6F735-uWm" target="_blank">Github.com - Pull request</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>SSH</h1>
+                    <p>네트워크 상의 다른 컴퓨터에 로그인하거나 원격 시스템에서 명령을 실행하고 다른 시스템으로 파일을 복사할 수 있도록 해 주는 응용 프로그램 또는 그 프로토콜</p>
+                    <div class="links">
+                        <a href="https://opentutorials.org/module/432/3738" target="_blank">원격제어 - SSH</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>HTTP(S)</h1>
+                    <p>World Wide Web 상에서 정보를 주고받을 수 있는 프로토콜</p>
+                    <div class="links">
+                        <a href="https://opentutorials.org/course/3385" target="_blank">WEB2 - HTTP</a>
+                        <a href="http://blog.wishket.com/http-vs-https-%EC%B0%A8%EC%9D%B4-%EC%95%8C%EB%A9%B4-%EC%82%AC%EC%9D%B4%ED%8A%B8%EC%9D%98-%EB%A0%88%EB%B2%A8%EC%9D%B4-%EB%B3%B4%EC%9D%B8%EB%8B%A4/" target="_blank">HTTP VS HTTPS 차이, 알면 사이트의 레벨이 보인다.</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>API</h1>
+                    <p>응용 프로그램에서 사용할 수 있도록, 운영 체제나 프로그래밍 언어가 제공하는 기능을 제어할 수 있게 만든 인터페이스</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=iyFHfzCRHA8" target="_blank">API 기초개념 잡아드림. 5분 순삭.</a>
+                        <a href="https://www.youtube.com/watch?v=QPEUU89AOg8" target="_blank">[JavaScript 기초와 활용 #2] API의 개념과 활용! 카카오 책 검색 기능 구현하기</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>서버 / 클라이언트 사이드 렌더링</h1>
+                    <p>내려받은 웹 페이지를 브라우저를 통해 사용자에게 보여주는 것</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=GQzn7XRdzxY" target="_blank">What is Server-Side Rendering? (Server-side Rendering with JavaScript Frameworks)</a>
+                        <a href="https://linked2ev.github.io/devlog/2018/11/15/Javascript-2.-What-is-SSR/" target="_blank">[Javascript] 2. 서버 사이드 렌더링(SSR:Server Side Rendering)이란?</a>
+                        <a href="https://jaroinside.tistory.com/24" target="_blank">11. 서버사이드 렌더링 , 클라이언트 사이드 렌더링</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>웹 보안</h1>
+                    <p>웹 사이트 및 OWA(Open Web Application)의 보안</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=okib5fMzVV4&list=PLuHgQVnccGMAE4Sn_SYvMw5-qEADJcU-X&index=72" target="_blank">웹애플리케이션 만들기 - 보안 1</a>
+                        <a href="https://developer.mozilla.org/ko/docs/Web/Security" target="_blank">웹 보안</a>
+                        <a href="https://www.youtube.com/playlist?list=PLQFHF6cwEgwM5svibsvonT5ZcGV02sOgb" target="_blank">(5)Computer Network (Network 보안 기술)</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>자료구조</h1>
+                    <p>컴퓨터 과학에서 효율적인 접근 및 수정을 가능케 하는 자료의 조직, 관리, 저장을 의미</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=OH7prOt3vQA&list=PLuHgQVnccGMDsWOOn_P0EmAWB8DArS3Fk&index=2" target="_blank">데이터 스트럭쳐란 무엇인가?</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>알고리즘</h1>
+                    <p>어떠한 문제를 해결하기 위해 정해진 일련의 절차나 방법을 공식화한 형태로 표현한 것</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=_eroIZisOCA" target="_blank">알고리즘.. 이 단어 신분 낮추어 드립니다 ^^</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>디자인 패턴</h1>
+                    <p>설계 문제에 대한 해답을 문서화하기위해 고안된 형식 방법</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=vPUmkQagOSM" target="_blank">Java - abstract (3/3) : 디자인 패턴</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>문자 인코딩</h1>
+                    <p>사용자가 입력한 문자나 기호들을 컴퓨터가 이용할 수 있는 신호로 만드는 것</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=ABPOjjre0C8" target="_blank">문자 인코딩 초간단 개념 정리 (UTF-8, 아스키, 유니코드...)</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Front-end-->
+            <div class="frontWrap js-frontWrap grid">
+                <div class="gridBlock">
+                    <h1>CSS</h1>
+                    <p>마크업 언어가 실제 표시되는 방법을 기술하는 언어</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=ONcmkf07EuI&list=PLuHgQVnccGMDaVaBmkX0qfB45R_bYrV62" target="_blank">CSS 수업 - CSS 소개</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>CSS 방법론</h1>
+                    <p>작성된 코드(CSS)를 쉽게 파악하고 유지보수가 쉽도록 하는 것</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=er1JEDuPbZQ" target="_blank">You Probably Need BEM CSS in Your Life (Tutorial)</a>
+                        <a href="https://nykim.work/15" target="_blank">[CSS 방법론] BEM 방식</a>
+                        <a href="https://chlolisher.tistory.com/11" target="_blank">[ CSS ] CSS 개념잡기 / CSS 방법론</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>CSS 전처리기</h1>
+                    <p>전처리기의 자신만의 특별한 syntax를 가지고 CSS를 생성하도록 하는 프로그램</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=eJahtnmywMI&list=PL1X_apj4ztk3U3adpHTHl3P4ggmNSx8v1" target="_blank">#1 Series Introduction - Stylus Tutorials</a>
+                        <a href="https://heropy.blog/2018/01/31/sass/" target="_blank">Sass(SCSS) 완전 정복!</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>JavaScript</h1>
+                    <p>객체 기반의 스크립트 프로그래밍 언어</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=dPRtcRwKo-Y&list=PLuHgQVnccGMBB348PWRN0fREzYcYgFybf" target="_blank">WEB2 JavaScript - 1.수업소개</a>
+                        <a href="https://www.youtube.com/watch?v=wcsVjmHrUQg" target="_blank">자바스크립트 배우기전 꼭 봐야할 영상 | 자바스크립트의 역사와 현재 그리고 미래 (JavaScript, ECMAScript, JQuery, Babel, Node.js)</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>CSS / JS 프레임워크</h1>
+                    <p>제공받은 일정한 요소와 틀, 규약을 가지고 무언가를 만드는 데 사용되는 것 (for CSS or JavaScript)</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=QTLLxMMgEvg&t=10s" target="_blank">프론트엔드 프레임워크! Bootstrap...그 외 꿀템 공유! (5 frontend framework that will save your time)</a>
+                        <a href="https://www.youtube.com/watch?v=_drzb7j9Bg4" target="_blank">Foundation CSS Framework Tutorial - Crash Course for Beginners</a>
+                        <a href="https://www.youtube.com/watch?v=atSIfMAmSic&list=PL9FpF_z-xR_GMujql3S_XGV2SpdfDBkeC&index=6" target="_blank">React.js 강좌 시리즈</a>
+                        <a href="https://www.youtube.com/playlist?list=PLYSZyzpwBEWSQsrukurP09ksi49H9Yj40" target="_blank">Next.js Tutorial</a>
+                        <a href="https://velog.io/@jakeseo_me/Next.js-%EB%B9%A8%EB%A6%AC-%EB%B0%B0%EC%9A%B0%EA%B8%B0-y0jz9oebn0" target="_blank">Next.js 필요한 것만 빨리 배우기</a>
+                        <a href="https://www.youtube.com/watch?v=jg2ha2RIWN0" target="_blank">[4분코딩] 리액트(React)와 찰떡 궁합 Next.js</a>
+                        <a href="https://www.youtube.com/watch?v=8t0vNu2fCCM" target="_blank">Gatsby JS - The Great Gatsby Bootcamp [Full Tutorial]</a>
+                        <a href=https://www.youtube.com/playlist?list=PL60Uti4nULBN7EQYmgjksXJXnkufo0m-9"" target="_blank">리엑트 네이티브 기본강좌</a>
+                        <a href="https://www.youtube.com/playlist?list=PLYxzS__5yYQmocPoLUiEAfD1cJNjhdQar" target="_blank">Electron Tutorials</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>패키지 매니저</h1>
+                    <p>자바스크립트 프로그래밍 언어를 위한 패키지 관리자</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=6fj0cpmMiVg&list=PLC3y8-rFHvwhgWwm5J3KqzX47n7dwWNrq" target="_blank">npm Tutorial for Beginners - 1 - Introduction</a>
+                        <a href="https://opentutorials.org/module/4044" target="_blank">npm</a>
+                        <a href="https://www.youtube.com/watch?v=KqaPMCMHH4g" target="_blank">YARN Tutorial | YARN Architecture | Hadoop Tutorial For Beginners | YARN In Hadoop | Simplilearn</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>빌드 도구</h1>
+                    <p>소스 코드에서 실행 가능한 응용 프로그램을 자동으로 만드는 프로그램</p>
+                    <div class="links">
+                        <a href="https://medium.com/@goinhacker/%EC%9A%B4%EC%98%81-%EC%9E%90%EB%8F%99%ED%99%94-1-%EB%B9%8C%EB%93%9C-%EC%9E%90%EB%8F%99%ED%99%94-by-gradle-7630c0993d09" target="_blank">운영 자동화#1 — 빌드 자동화 by Gradle</a>
+                        <a href="https://www.youtube.com/playlist?list=PLMxpKvJf0K0QUyvmkKZu7WpwTVzdePGTl" target="_blank">Gradle Tutorials for beginners [ Gradle build tool ] (2020 update)</a>
+                        <a href="https://www.youtube.com/watch?v=gm2i-xtye8Q" target="_blank">Webpack Tutorial - How to Use Webpack as a Module Bundler for Your Code Base</a>
+                        <a href="https://www.youtube.com/playlist?list=PLLlgO7f2pQ1TzkBp9KaeRk-UGtZry7qn0" target="_blank">Linters And Formatters</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>웹 컴포넌트</h1>
+                    <p>기능을 나머지 코드로부터 캡슐화하여 재사용 가능한 사용자 정의 요소를 만들어 웹 앱에서 활용할 수 있도록 하는 다양한 기술 모음</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/playlist?list=PLOU2XLYxmsIJkA_W95NDrjdkk3dR6Jq4w" target="_blank">Web Components</a>
+                        <a href="https://developer.mozilla.org/ko/docs/Web/Web_Components" target="_blank">웹 컴포넌트</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>유닛 테스트</h1>
+                    <p>컴퓨터 프로그래밍에서 소스 코드의 특정 모듈이 의도된 대로 정확히 작동하는지 검증하는 절차</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=7r4xVDI2vho" target="_blank">Jest Crash Course - Unit Testing in JavaScript</a>
+                        <a href="https://medium.com/@jinseok.choi/jest%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-unit-test-%EC%A0%81%EC%9A%A9%EA%B8%B0-420049c16cc8" target="_blank">Jest를 이용한 Unit Test 적용기</a>
+                        <a href="https://www.youtube.com/watch?v=ZmVBCpefQe8" target="_blank">Intro to React Testing [Jest and React Testing Library Tutorial]</a>
+                        <a href="https://www.youtube.com/watch?v=7N63cMKosIE" target="_blank">Cypress End-to-End Testing</a>
+                        <a href="https://www.youtube.com/playlist?list=PLGDf0elkI13EfDa45q-q1YpAIMBl5mjabE" target="_blank">Testing React with Jest and Enzyme series</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>자료형 검사</h1>
+                    <p>프로그램이 자료형의 제약 조건을 지키는지 검증하는 것</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=-TQVAKby6oI" target="_blank">Type checking | Compiler Design | Lec-39 | Bhanu Priya</a>
+                        <a href="https://www.youtube.com/watch?v=fO5fO-gelfA" target="_blank">Typescript? 타입스크립트 배워야 하나요?</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>프로그레시브 웹 앱</h1>
+                    <p>웹과 네이티브 앱의 기능 모두의 이점을 갖도록 수 많은 특정 기술과 표준 패턴을 사용해 개발된 웹 앱</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/playlist?list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7" target="_blank">PWA Tutorial for Beginners</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>웹 어셈블리</h1>
+                    <p>C/C++, Rust 등과 같은 언어의 컴파일 타겟으로써 그런 언어로 작성된 프로그램을 웹에서 사용할 수 있게 해주는 코드</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=KjgDxBLv0bM" target="_blank">웹 어셈블리는 자바스크립트의 무덤일까?</a>
+                        <a href="https://www.youtube.com/watch?v=jGKjKx2vous" target="_blank">What is WebAssembly? WebAssembly Hello World</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Back-end-->
+            <div class="backWrap js-backWrap grid">
+                <div class="gridBlock">
+                    <h1>OS (운영 체제)</h1>
+                    <p>시스템 하드웨어를 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위하여 하드웨어 추상화 플랫폼과 공통 시스템 서비스를 제공하는 시스템 소프트웨어</p>
+                    <div class="links">
+                        <a href=https://www.youtube.com/watch?v=EdTtGv9w2sA"" target="_blank">[OS] Lecture 1. Computer System Overview / 운영체제 강의</a>
+                        <a href="https://www.youtube.com/watch?v=SkB-eRCzWIU&t=17s" target="_blank">Linux Terminal Introduction</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>관계형 데이터베이스</h1>
+                    <p>키(key)와 값(value)들의 간단한 관계를 테이블화 시킨 매우 간단한 원칙의 전산정보 데이터베이스</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=1d38YZKCM88&list=PLuHgQVnccGMDF6rHsY9qMuJMd295Yk4sa" target="_blank">관계형 데이터 모델링 - 1. 수업소개</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>SQL</h1>
+                    <p>관계형 데이터베이스 관리 시스템(RDBMS)의 데이터를 관리하기 위해 설계된 특수 목적의 프로그래밍 언어</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=z9chRlD1tec" target="_blank">아직도 SQL을 모른다고해서 5분 설명해드림</a>
+                        <a href="https://www.w3schools.com/sql/default.asp" target="_blank">SQL Tutorial</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>NoSQL</h1>
+                    <p>Not SQL / Not only SQL</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=Q_9cFgzZr8Q&t=2s" target="_blank">SQL vs NoSQL 5분컷 설명!</a>
+                        <a href="https://www.youtube.com/watch?v=p9ZL47M8Ygk&list=PL7mmuO705dG0_LVAiIdm02qo0n7ZC3_Sx&index=2" target="_blank">1장 데이터베이스와 NoSQL - 1. 데이터베이스 기본</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>캐시</h1>
+                    <p>컴퓨터 과학에서 데이터나 값을 미리 복사해 놓는 임시 장소</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=n__c7xY1ZcI" target="_blank">Caching - Web Development</a>
+                        <a href="https://opentutorials.org/module/3830" target="_blank">HTTP Cache</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>CI / CD</h1>
+                    <p>애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공하는 방법</p>
+                    <div class="links">
+                        <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank">CI/CD(지속적 통합/지속적 제공): 개념, 방법, 장점, 구현 과정</a>
+                        <a href="https://www.youtube.com/watch?v=10TSLgh4gQM" target="_blank">[온라인 무료 교육] 개발자도구로 CI/CD 구현하기</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--DevOps-->
+            <div class="devopsWrap js-devopsWrap grid">
+                <div class="gridBlock">
+                    <h1>Go(lang)</h1>
+                    <p>구글이 개발한 가비지 컬렉션 기능이 있고, 병행성을 잘 지원하는 프로그래밍 언어</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=VDaMhtWNSQU&t=31s" target="_blank">왜 구글의 프로그래밍 언어 Go가 겁나 핫한건지 5분 설명</a>
+                        <a href="https://www.youtube.com/watch?v=QUbdGXe9aMc" target="_blank">구글 고(Go) 언어소개! 🥪탄생배경과 장단점 [언어탐방🔎]</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>리버스 프록시</h1>
+                    <p>컴퓨터 네트워크에서 클라이언트를 대신해서 한 대 이상의 서버로부터 자원을 추출하는 프록시 서버의 일종</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=3yMY5phIaDc" target="_blank">Nginx, 리버스 프록시 설정하기</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>포워드 프록시</h1>
+                    <p>클라이언트가 자신을 통해서 다른 네트워크 서비스에 간접적으로 접속할 수 있게 해 주는 컴퓨터 시스템이나 응용 프로그램</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=lg-wHikZg0Q" target="_blank">[10분 테코톡] 🤝쉐이크반의 Forward Proxy vs Reverse Proxy</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>캐시 서버</h1>
+                    <p>인터넷 서비스 속도를 높이기 위해 사용자와 가까운 곳에 데이터를 임시 저장하여 빠르게 제공해주는 서버</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=kmdQlpIQTdE" target="_blank">HTTP Cache - 6. 캐쉬정책</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>부하분산(로드 밸런싱)</h1>
+                    <p>컴퓨터 네트워크 기술의 일종으로 둘 혹은 셋 이상의 중앙처리장치 혹은 저장장치와 같은 컴퓨터 자원들에게 작업을 나누는 것</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=K0Ta65OqQkY" target="_blank">What is Load Balancing?</a>
+                        <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=27046347&memberNo=2521903" target="_blank">로드밸런서(Load Balancer)의 개념과 특징</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>방화벽</h1>
+                    <p>미리 정의된 보안 규칙에 기반한, 들어오고 나가는 네트워크 트래픽을 모니터링하고 제어하는 네트워크 보안 시스템</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=kDEX1HXybrU" target="_blank">What is a Firewall?</a>
+                        <a href="https://www.youtube.com/watch?v=1iGJpH8x-GI&list=PLQFHF6cwEgwM5svibsvonT5ZcGV02sOgb&index=3" target="_blank">3. 방화벽 개념 및 동작원리 (1/3)</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>웹 서버</h1>
+                    <p>웹 브라우저와 같은 클라이언트로부터 HTTP 요청을 받아들이고, HTML 문서와 같은 웹 페이지를 반환하는 컴퓨터 프로그램</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=JhpUch6lWMw" target="_blank">What are web servers and how do they work (with examples httpd and nodejs)</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>코드로 인프라 관리하기(Infrastructure as code)</h1>
+                    <p>시스템을 수동으로 관리하는 대신 스크립트를 사용하여 컴퓨팅 인프라를 구성하는 방식</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=zWw2wuiKd5o" target="_blank">What is Infrastructure as Code?</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>서비스 메쉬(Service Mesh)</h1>
+                    <p>애플리케이션의 다양한 부분들이 서로 데이터를 공유하는 방식을 제어하는 방법</p>
+                    <div class="links">
+                        <a href="https://www.redhat.com/ko/topics/microservices/what-is-a-service-mesh#:~:text=%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%A9%94%EC%89%AC%EC%97%90%EC%84%9C%EB%8A%94%20%EC%9A%94%EC%B2%AD%EC%9D%B4,%EB%90%98%EB%AF%80%EB%A1%9C%20'sidecar'%EB%9D%BC%EA%B3%A0%EB%8F%84%20%ED%95%A9%EB%8B%88%EB%8B%A4." target="_blank">서비스 메쉬란 무엇일까요?</a>
+                        <a href="https://www.youtube.com/watch?v=wKz59aGuXMA" target="_blank">[Digi-Talks] Multi-Cluster Service Mesh를 아시나요?^^</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>CI / CD</h1>
+                    <p>애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공하는 방법</p>
+                    <div class="links">
+                        <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank">CI/CD(지속적 통합/지속적 제공): 개념, 방법, 장점, 구현 과정</a>
+                        <a href="https://www.youtube.com/watch?v=10TSLgh4gQM" target="_blank">[온라인 무료 교육] 개발자도구로 CI/CD 구현하기</a>
+                    </div>
+                </div>
+                <div class="gridBlock">
+                    <h1>인프라 모니터링</h1>
+                    <p>인프라에서 데이터를 수집 및 분석하고 해당 데이터를 활용하여 비즈니스 결과를 개선하고 조직의 가치 창출을 도모하는 것</p>
+                    <div class="links">
+                        <a href="https://www.youtube.com/watch?v=fkiSnwHkJLE" target="_blank">[2018] NHN 모니터링의 현재와 미래 for 인프라 엔지니어</a>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </article>
+
+    <!--JavaScript-->
+    <script>
+        const home_btn = document.getElementById('home');
+        const goMain =function(){
+            console.log('홈으로 이동');
+            window.location.href= `${window.origin}/`; 
+        }; 
+        home_btn.addEventListener("click",goMain);
+   
+        const commonWrap = document.querySelector('.js-commonWrap');
+        const frontWrap = document.querySelector('.js-frontWrap');
+        const backWrap = document.querySelector('.js-backWrap');
+        const devopsWrap = document.querySelector('.js-devopsWrap');
+        const btn1 = document.querySelector('.js-btn1');
+        const btn2 = document.querySelector('.js-btn2');
+        const btn3 = document.querySelector('.js-btn3');
+        const btn4 = document.querySelector('.js-btn4');
+
+        const SHOWING_CLASS = "showing";
+        const SELECTED_CLASS = "selected";
+
+        let selectedPage = 1;
+
+        function handleBtn4() {
+            commonWrap.classList.remove(SHOWING_CLASS);
+            frontWrap.classList.remove(SHOWING_CLASS);
+            backWrap.classList.remove(SHOWING_CLASS);
+            devopsWrap.classList.add(SHOWING_CLASS);
+            btn1.classList.remove(SELECTED_CLASS);
+            btn2.classList.remove(SELECTED_CLASS);
+            btn3.classList.remove(SELECTED_CLASS);
+            btn4.classList.add(SELECTED_CLASS);
+            devopsWrap.scrollTo({ top: 0 });
+        }
+
+        function handleBtn3() {
+            commonWrap.classList.remove(SHOWING_CLASS);
+            frontWrap.classList.remove(SHOWING_CLASS);
+            backWrap.classList.add(SHOWING_CLASS);
+            devopsWrap.classList.remove(SHOWING_CLASS);
+            btn1.classList.remove(SELECTED_CLASS);
+            btn2.classList.remove(SELECTED_CLASS);
+            btn3.classList.add(SELECTED_CLASS);
+            btn4.classList.remove(SELECTED_CLASS);
+            backWrap.scrollTo({ top: 0 });
+        }
+
+        function handleBtn2() {
+            commonWrap.classList.remove(SHOWING_CLASS);
+            frontWrap.classList.add(SHOWING_CLASS);
+            backWrap.classList.remove(SHOWING_CLASS);
+            devopsWrap.classList.remove(SHOWING_CLASS);
+            btn1.classList.remove(SELECTED_CLASS);
+            btn2.classList.add(SELECTED_CLASS);
+            btn3.classList.remove(SELECTED_CLASS);
+            btn4.classList.remove(SELECTED_CLASS);
+            frontWrap.scrollTo({ top: 0 });
+        }
+
+        function handleBtn1() {
+            commonWrap.classList.add(SHOWING_CLASS);
+            frontWrap.classList.remove(SHOWING_CLASS);
+            backWrap.classList.remove(SHOWING_CLASS);
+            devopsWrap.classList.remove(SHOWING_CLASS);
+            btn1.classList.add(SELECTED_CLASS);
+            btn2.classList.remove(SELECTED_CLASS);
+            btn3.classList.remove(SELECTED_CLASS);
+            btn4.classList.remove(SELECTED_CLASS);
+            commonWrap.scrollTo({ top: 0 });
+        }
+
+        function init() {
+            btn1.addEventListener('click', handleBtn1);
+            btn2.addEventListener('click', handleBtn2);
+            btn3.addEventListener('click', handleBtn3);
+            btn4.addEventListener('click', handleBtn4);
+            handleBtn1();
+        }
+        init();
+    </script>
+</body>
+</html>
