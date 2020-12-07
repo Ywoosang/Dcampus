@@ -39,7 +39,8 @@ def create_app():
         except:
             print('session is not created')
             pass
-
+    
+    
     @app.context_processor
     def context_processor():
         try : 

@@ -71,6 +71,9 @@ function trashPlan(event){
         }); 
     }
 }; 
+
+
+// fhzjf 
 function saveLocalPlans(plan){
     let plans;
     if(localStorage.getItem('plans')== null){

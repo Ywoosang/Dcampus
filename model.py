@@ -9,3 +9,7 @@ class Users(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.user_id
 
+# class Project(db.Model):
+#     id = db.Column(db.Integer,primary_key=True)  
+#     user_name = 
+#     content = db.Column()
