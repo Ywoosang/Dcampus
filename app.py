@@ -55,7 +55,7 @@ def create_app():
     return app
  
 
-create_app()
+app = create_app() 
 
 
 #Create a function return a string when we add 
