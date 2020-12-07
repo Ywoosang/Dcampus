@@ -6,32 +6,9 @@ body{
     display : flex;
     flex-direction: column; 
 }
-header div{
-    flex:1;
-    height: 69px;
-    background-color: #9e1814; 
-    margin-bottom: 51px; 
-    padding-top:28px;
-     
+header {
+    margin-bottom: 60px;
 }
-.fa-times, .fa-check ,.fa-trash, .fa-home{
-    pointer-events: none;}
-    #home {
-        position: absolute;
-        font-size: 60px;
-        left: 60px;
-        top: -27px;
-        color: white;
-    }
-#logo{
-    margin: 0 auto; 
-    width: 194px; 
-    height: 40px;
-    background-image: url('../img/logo.png');
-    background-repeat: no-repeat; 
-    background-position : -51px -158px; 
-}
-
 /* Road Map */
 #title {
     position: absolute;

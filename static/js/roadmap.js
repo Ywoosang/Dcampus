@@ -1,0 +1,70 @@
+const commonWrap = document.querySelector('.js-commonWrap');
+const frontWrap = document.querySelector('.js-frontWrap');
+const backWrap = document.querySelector('.js-backWrap');
+const devopsWrap = document.querySelector('.js-devopsWrap');
+const btn1 = document.querySelector('.js-btn1');
+const btn2 = document.querySelector('.js-btn2');
+const btn3 = document.querySelector('.js-btn3');
+const btn4 = document.querySelector('.js-btn4');
+
+const SHOWING_CLASS = "showing";
+const SELECTED_CLASS = "selected";
+
+let selectedPage = 1;
+
+function handleBtn4() {
+    commonWrap.classList.remove(SHOWING_CLASS);
+    frontWrap.classList.remove(SHOWING_CLASS);
+    backWrap.classList.remove(SHOWING_CLASS);
+    devopsWrap.classList.add(SHOWING_CLASS);
+    btn1.classList.remove(SELECTED_CLASS);
+    btn2.classList.remove(SELECTED_CLASS);
+    btn3.classList.remove(SELECTED_CLASS);
+    btn4.classList.add(SELECTED_CLASS);
+    devopsWrap.scrollTo({ top: 0 });
+}
+
+function handleBtn3() {
+    commonWrap.classList.remove(SHOWING_CLASS);
+    frontWrap.classList.remove(SHOWING_CLASS);
+    backWrap.classList.add(SHOWING_CLASS);
+    devopsWrap.classList.remove(SHOWING_CLASS);
+    btn1.classList.remove(SELECTED_CLASS);
+    btn2.classList.remove(SELECTED_CLASS);
+    btn3.classList.add(SELECTED_CLASS);
+    btn4.classList.remove(SELECTED_CLASS);
+    backWrap.scrollTo({ top: 0 });
+}
+
+function handleBtn2() {
+    commonWrap.classList.remove(SHOWING_CLASS);
+    frontWrap.classList.add(SHOWING_CLASS);
+    backWrap.classList.remove(SHOWING_CLASS);
+    devopsWrap.classList.remove(SHOWING_CLASS);
+    btn1.classList.remove(SELECTED_CLASS);
+    btn2.classList.add(SELECTED_CLASS);
+    btn3.classList.remove(SELECTED_CLASS);
+    btn4.classList.remove(SELECTED_CLASS);
+    frontWrap.scrollTo({ top: 0 });
+}
+
+function handleBtn1() {
+    commonWrap.classList.add(SHOWING_CLASS);
+    frontWrap.classList.remove(SHOWING_CLASS);
+    backWrap.classList.remove(SHOWING_CLASS);
+    devopsWrap.classList.remove(SHOWING_CLASS);
+    btn1.classList.add(SELECTED_CLASS);
+    btn2.classList.remove(SELECTED_CLASS);
+    btn3.classList.remove(SELECTED_CLASS);
+    btn4.classList.remove(SELECTED_CLASS);
+    commonWrap.scrollTo({ top: 0 });
+}
+
+function init() {
+    btn1.addEventListener('click', handleBtn1);
+    btn2.addEventListener('click', handleBtn2);
+    btn3.addEventListener('click', handleBtn3);
+    btn4.addEventListener('click', handleBtn4);
+    handleBtn1();
+}
+init();

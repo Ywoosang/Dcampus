@@ -7,6 +7,7 @@
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}"> -->
     {% block link %} {% endblock %}
     <title>{% block title %}{% endblock %}</title>
@@ -14,6 +15,11 @@
 <body>
     <p style="position:absolute;">{{ makeAlert | safe }} </p> 
     <div class="app-main">
+    <header>
+        <div class="title">
+            <a href='/'>D-campus</a>
+        </div>
+    </header>
     {% block main %}{% endblock %}
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

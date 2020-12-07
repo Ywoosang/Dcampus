@@ -41,10 +41,5 @@
             <div><a>COPYRIGHT &copy; re designed by yd_w_sang</a></div>
         </article>
     </section>
-    {% for user in users %}
-    <h4>
-        {{ user.user_name }} <a href="/update/{{ user.id }}">Update</a> <a href="/delete/{{ user.id }}">delete</a>
-    </h4>
-    {% endfor %}
 </div>
 {% endblock %}

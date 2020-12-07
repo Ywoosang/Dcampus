@@ -29,16 +29,6 @@ hideWindow.addEventListener('click',()=>{
 const planList = document.querySelector('.todo-list');
 const inputText = document.querySelector(".plan-input");  
 const registerButton = document.querySelector(".register-btn");
- 
-
-
-const home_btn = document.getElementById('home');
-const goMain =function(){
-    console.log('홈으로 이동');
-    window.location.href= `${window.origin}/`; 
-}; 
-home_btn.addEventListener("click",goMain);
-
 
 registerButton.addEventListener('click',addPlan);  
 planList.addEventListener('click',trashPlan); 
@@ -105,14 +95,12 @@ function removeLocalTodos(plan){
     localStorage.setItem('plans',JSON.stringify(plans));
 }
 function getLocalPlans(){
-    console.log('로컬 호출');
     let plans;
     if(localStorage.getItem('plans') == null){
         plans =[]; 
     }else{
         plans = JSON.parse(localStorage.getItem('plans'));
     }
-    console.log(plans);
     plans.forEach(function(plan,el,all){    
         const planDiv = document.createElement('div');
         planDiv.classList.add('todo');

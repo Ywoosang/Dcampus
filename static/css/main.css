@@ -1,53 +1,20 @@
-/* reset.css */
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;600;700&display=swap');
-@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
-@font-face {
-    font-family: 'yg-jalnan';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-body,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-    color:rgba(255, 255, 255, 0.92); 
-}
-a {
-    text-decoration: none;
-    color: #222;
-}
-ul {
-    list-style: none;
-}
-button {
-    cursor: pointer;
-    outline: none;
-}
-.slick-dots>li, .slick-arrow{
-    display : none !important; 
-}
-.slider{
-   box-sizing: border-box ;
-}
 /* main */
+header {
+    display: none;
+}
+
 .wrapper {
     display: flex;
     justify-content: center;
 }
+
 .main {
     margin-top: 40px;
     width: 1245px;
     height: 610px;
     font-size: 0;
 }
+
 .main .box {
     float: left;
     height: 590px;
@@ -56,10 +23,12 @@ button {
     font-size: 20px;
     background-color: rgba(0, 0, 0, 0.83);
 }
+
 /* title */
 .main-title {
     width: 480px;
 }
+
 .main-title .title {
     margin-left: 80px;
     position: absolute;
@@ -70,6 +39,7 @@ button {
     font-family: 'yg-jalnan';
     font-size: 60px;
 }
+
 .main-des {
     padding-left: 90px;
     width: 600px;
@@ -77,73 +47,120 @@ button {
     justify-content: center;
     flex-direction: column;
 }
+
 .inner {
     height: 120px;
     display: flex;
-    margin : 10px 0; 
+    margin: 10px 0;
 }
+
 .inner:hover {
     opacity: 0.8;
 }
-.inner div{
-    float:left;
+
+.inner div {
+    float: left;
 }
+
 .inner .icon {
-    margin : 10px 20px  20px; 
+    margin: 10px 20px 20px;
 }
+
 .inner .icon i {
     font-size: 60px;
 }
+
 .inner .inner-des {
     margin: 6px 0 0 0px;
     box-sizing: border-box;
 }
-.inner .inner-des p{
+
+.inner .inner-des p {
     font-size: 15px;
 }
-.main-nav,.main-nav div{
+
+.main-nav,
+.main-nav div {
     width: 155px;
 }
-.main-nav div{
-    background-color: #711612 ;  
-    border-bottom :0.1px solid rgba(255, 255, 255, 0.3);  
-    display :flex;
+
+.main-nav div {
+    background-color: #711612;
+    border-bottom: 0.1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
     align-items: center;
-    justify-content : center;
-    text-align: center; 
+    justify-content: center;
+    text-align: center;
     cursor: pointer;
 }
-.main-nav div a p{
+
+.main-nav div a p {
     font-size: 13px;
     color: rgba(255, 255, 255, 0.61);
-    text-align: center; 
+    text-align: center;
 }
-.go-roadmap{
-    height: 80px; 
+.go-roadmap {
+    height: 80px;
 }
-.go-main{
+.go-main {
     height: 340px;
 }
-.go-project{
-    height : 84px;
-    background-color: #675425 !important; 
+
+.go-project {
+    height: 84px;
+    background-color: #675425 !important;
 }
-.go-link{
+
+.go-link {
     height: 80px;
     background-color: #675425 !important;
 }
-/*nav */
-.warn{
-    display : none; 
-    margin:0 auto; 
+
+/*gnb */ 
+.gnb {
+    margin: 0 auto;
+    width: 1230px;
+    height: 40px;
+    text-align: right;
 }
+.gnb a {
+    font-family: 'yg-jalnan';
+    font-size: 23px;
+    margin: 4px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.gnb a:hover {
+    color: darkblue;
+}
+
+.gnb-login {
+    width: 100px;
+    height: 20px;
+}
+
+.gnb-login::after {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 3px;
+    background-color: rgba(0, 0, 0, 0.45);
+    margin: 6px 6px
+}
+/*nav */
+.warn {
+    display: none;
+    margin: 0 auto;
+}
+
 @media screen and (max-width:1310px) {
-    .main{
-        display:none;
+    section {
+        display: none;
     }
-    .warn{
-        display:block;
-        color : black;
+
+    .warn {
+        display: block;
+        color: black;
     }
-    
+
 }

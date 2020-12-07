@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
 {% block main %}
-<div class="wrapper" id=app>
+<div id=app> 
+<div class="wrapper">
     <section class="main ">
         <div class="main-title box">
             <div class="title">
@@ -86,6 +87,24 @@
         </div>
     </section>
     <h1 class="warn">웹 전체화면에서 보시오.</h1>
+</div>
+<section>
+    <div class="gnb">
+        <template v-if="login">
+            <a>안녕하세요 {{ username }} 님</a>
+        </template>
+        <template v-else> 
+        <a href="/login" class="gnb-login">로그인</a>
+        <a href="/signup" class="gnb-signup">회원가입</a> 
+        </template>
+    </div>
+</section>
+<section style="margin-left : 600px;"> 
+    <a>이용중인 사용자 내역(테스트) : </a>
+    {% for user in users %} 
+    <a>{{ user.user_name }} <a href="/update/{{ user.id }}">Update</a> <a href="/delete/{{ user.id }}">delete</a></a> 
+    {% endfor %}
+</section>  
 </div>
 {% endblock %}
 {% block script %}

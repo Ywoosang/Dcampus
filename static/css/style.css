@@ -1,12 +1,63 @@
-body { 
-    position :relative; 
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;600;700&display=swap');
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-div{
-    width : 500px;
-    font-size: 30px;
-    height : 500px;
-    position :absolute;
-    left: 50%;
-    right :50%;
-    transform: translate(-50%,-50%); 
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+}
+
+.slick-dots > li,
+.slick-arrow {
+    display: none !important;
+}
+
+.slider {
+    box-sizing: border-box;
+}
+
+header {
+    height: 98px;
+    background-color: #9E1814;
+}
+
+header .title {
+    text-align: center;
+    padding : 0 !important;
+    margin : 0; 
+}
+
+header .title a {
+    padding: 10px;
+    font-family: 'yg-jalnan';
+    font-size: 50px;
+    color: white;
 }
