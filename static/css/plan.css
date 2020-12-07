@@ -21,6 +21,7 @@ header div {
     box-sizing: border-box;
 }
 .makePlan {
+    z-index: 1001;
     position : absolute;
     left : 50%;
     top: 50%;
