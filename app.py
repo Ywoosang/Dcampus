@@ -38,20 +38,19 @@ class Clients :
 def before_request():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=2)
-    g.user = None
-    if 'user_id' in session:
-        user_list = [x for x in Clients.users if x.user_id == session['user_id']]
-        if user_list != [] : 
-            g.user = user_list[0]  # use 에 append 된건 이름,아이디,비번이 넣어진 User 인스턴스임
-            print("<name:" + g.user.user_name)
+     
+ 
+        # user_list = [x for x in Clients.users if x.user_id == session['user_id']]
+        # if user_list != [] : 
+        #     g.user = user_list[0]  # use 에 append 된건 이름,아이디,비번이 넣어진 User 인스턴스임
+        #     print("<name:" + g.user.user_name)
 
 @app.route('/main/usercheck',methods=["POST"])
 def userCheck():
-    print("데이터 보내짐")
-    if not g.user: 
+    if 'user_id' not in session: 
         name = 'guest'
     else :
-        name = str(g.user.user_name)
+        name = 'user'
     response = {
         'name' : name
     }
@@ -64,6 +63,7 @@ def root():
 @app.route('/login',methods=["GET","POST"])
 def login():
     if request.method == "POST":
+        session.pop('user_id', None) 
         user_id = request.form.get('Id')
         user_passwd = request.form.get('passwd')
         User = Users.query.filter_by(user_id=user_id).first() #Users 클래스 객체로 가져옴
