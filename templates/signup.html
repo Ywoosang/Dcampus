@@ -7,27 +7,25 @@
 <div class="container">
     <section class="main">
         <article class="sign-in">
-            <form method="POST" action="/signup">
+            <form method="POST" action="/signup" id="form" >
                 <h1>회원가입</h1>
                 <div class="input">
                     <span class="input-group-addon">
-                        <i class="fa fa-user "></i>
+                        <i class="fa fa-user"></i>
                     </span>
-                    <input type="text" id="inputName" name="name" class="form-control" placeholder=" " required
-                        autofocus>
+                    <input type="text" id="inputName" name="name" class="form-control" placeholder="이름을 입력해 주세요" autofocus>
                 </div>
                 <div class="input">
                     <span class="input-group-addon">
                         <i class="fa fa-envelope"></i>
                     </span>
-                    <input type="text" id="inputId" name="Id" class="form-control" placeholder="" required autofocus>
+                    <input type="text" id="inputId" name="Id"  placeholder="이메일을 입력해 주세요" class="form-control">
                 </div>
                 <div class="input">
                     <span class="input-group-addon">
                         <i class="fa fa-lock"></i>
                     </span>
-                    <input type="password" id="inputPassword" name="passwd" class="form-control" placeholder=""
-                        required>
+                    <input type="password" id="inputPassword" name="passwd" class="form-control" placeholder="비밀번호를 입력해 주세요">
                 </div>
                 <hr>
                 <div class="button">
@@ -42,4 +40,7 @@
         </article>
     </section>
 </div>
+{% endblock %}
+{% block script %}
+<script src="{{ url_for('static',filename='js/signup.js') }}"> </script>
 {% endblock %}

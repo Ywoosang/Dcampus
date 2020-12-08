@@ -8,12 +8,12 @@
         <div class="center">
             <article class="form">
                 <h1>로그인</h1>
-                <form method="POST" action="/login">
+                <form method="POST" action="/login" id="form">
                     <div class="input">
-                        <input type="email" id="inputId" name="Id" placeholder="이메일  입력" autofocus>
+                        <input type="text" id="inputId" name="Id" placeholder="이메일을 입력해 주세요" autofocus> 
                     </div>
                     <div class="input">
-                        <input type="password" id="inputPassword" name="passwd" placeholder="비밀번호 입력">
+                        <input type="text" id="inputPassword" name="passwd" placeholder="비밀번호를 입력해 주세요">
                     </div>
                     <div id="line">
                         <div></div>
@@ -29,4 +29,7 @@
             </article>
         </div>
     </section>
+{% endblock %}
+{% block script %}
+<script src="{{ url_for('static',filename='js/login.js') }}"> </script>
 {% endblock %}
