@@ -168,4 +168,4 @@ def getItems():
 def main():
     if 'user_id' not in session:
         return abort(403)
-    return render_template('poseChecker.html')
+    return "계속되는 야근으로 과로사 직전입니다."
