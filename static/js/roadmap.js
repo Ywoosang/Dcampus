@@ -84,6 +84,7 @@ const server = {
                 link.classList.add('done');
             }
         }
+        links.indexOf(0).classList.remove('done')
     },
     addId : function(){
         for (let i = 1; i < this.links.length; i++) {
