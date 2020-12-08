@@ -59,26 +59,26 @@
             </div>
         </div>
         <div class="main-nav box">
-            <div class="go-roadmap">
+            <div class="go-roadmap left-top">
                 <a @click="goRoadmap">
                     <h5>Rodamap 가기</h5>
                     <p>관련 강좌 제공</p>
                 </a>
             </div>
-            <div class="go-main">
-                <a href="/">
+            <div class="go-main left-top">
+                <a href="/main">
                     <i style="color:white; font-size:60px; margin-bottom: 10px;" class="fa fa-university"></i>
                     <h5>d-campus 가기</h5>
                     <p>(온라인 학습실)</p>
                 </a>
             </div>
-            <div class="go-project">
+            <div class="go-project left-bottom">
                 <a @click="goProject">
-                    <p style="text-align: left;">project</p>
+                    <p style="text-align: eft;">project</p>
                     <h5>진행목록 보기</h5>
                 </a>
             </div>
-            <div class="go-link">
+            <div class="go-link left-bottom">
                 <a href="/">
                     <h5>link 저장소 가기</h5>
                     <p>(개인별)</p>
@@ -86,12 +86,12 @@
             </div>
         </div>
     </section>
-    <h1 class="warn">웹 전체화면에서 보시오.</h1>
 </div>
 <section>
     <div class="gnb">
         <template v-if="login">
             <a>안녕하세요 {{ username }} 님</a>
+            <a></a>
         </template>
         <template v-else> 
         <a href="/login" class="gnb-login">로그인</a>
@@ -99,12 +99,12 @@
         </template>
     </div>
 </section>
-<section style="margin-left : 600px;"> 
+<!-- <section style="margin-left : 600px;"> 
     <a>이용중인 사용자 내역(테스트) : </a>
     {% for user in users %} 
     <a>{{ user.user_name }} <a href="/update/{{ user.id }}">Update</a> <a href="/delete/{{ user.id }}">delete</a></a> 
     {% endfor %}
-</section>  
+</section>   -->
 </div>
 {% endblock %}
 {% block script %}

@@ -112,7 +112,7 @@ header {
 }
 
 .go-link {
-    height: 80px;
+    height: 82px;
     background-color: #675425 !important;
 }
 
@@ -152,15 +152,36 @@ header {
     display: none;
     margin: 0 auto;
 }
+.left-bottom:hover{
+    background-color:#81692b !important;
+}
+.left-top:hover{
+    opacity: 0.9;
+}
 
 @media screen and (max-width:1310px) {
-    section {
+    .main{
+        width : auto;
+    }
+    .main-title {
         display: none;
     }
-
     .warn {
         display: block;
         color: black;
     }
-
+    .gnb{
+        width : 80%;
+    
+    }
 }
+@media screen and (max-width:760px) {
+    .main-des{
+        display:none;
+    }
+    .gnb{
+        display: none;
+    }
+
+} 
+ 

@@ -8,7 +8,6 @@
     font-weight: normal;
     font-style: normal;
 }
-
 body,
 p,
 h1,
@@ -20,44 +19,40 @@ h6 {
     margin: 0;
     color: rgba(255, 255, 255, 0.92);
 }
-
 a {
     text-decoration: none;
     color: #222;
 }
-
 ul {
     list-style: none;
 }
-
 button {
     cursor: pointer;
     outline: none;
 }
-
 .slick-dots > li,
 .slick-arrow {
     display: none !important;
 }
-
 .slider {
     box-sizing: border-box;
 }
-
 header {
     height: 98px;
-    background-color: #9E1814;
+    background-color: #711612;
 }
-
 header .title {
     text-align: center;
     padding : 0 !important;
     margin : 0; 
 }
-
 header .title a {
     padding: 10px;
     font-family: 'yg-jalnan';
     font-size: 50px;
     color: white;
+}
+.done{
+    background-color : #9ce9aa !important;
+    opacity: 0.8 !important;
 }

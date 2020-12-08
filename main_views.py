@@ -1,5 +1,5 @@
-from flask import Blueprint,render_template,request,session,redirect,url_for,abort
-from  model import Users
+from flask import Blueprint,render_template,request,session,redirect,url_for,abort,make_response,jsonify
+from  model import Users,Project,Link,Tag
 from  app import db
 
 
@@ -13,14 +13,13 @@ def root():
 @bp.route('/login',methods=["GET","POST"])
 def login():
     if request.method == "POST":
-        session.pop('user_name', None) 
+        session.pop('user_id', None) 
         user_id = request.form.get('Id')
         user_passwd = request.form.get('passwd')
         User = Users.query.filter_by(user_id=user_id).first() #Users 클래스 객체로 가져옴
         if User != None : 
             if user_id == User.user_id and user_passwd == User.user_passwd:
-
-                session['user_name'] = User.user_name
+                session['user_id'] = User.user_id
                 return redirect(url_for('views.root'))
         makeAlert ="""<script>alert("로그인 오류")</script>"""
         return render_template("login.html",makeAlert=makeAlert)
@@ -28,19 +27,15 @@ def login():
 
 @bp.route('/project')
 def project():
-    if 'user_name' not in session:
+    if 'user_id' not in session:
         return abort(403)
     return render_template('plan.html') 
 
 @bp.route('/roadmap')
 def roadmap():
-    if 'user_name' not in session:
+    if 'user_id' not in session:
         return abort(403)
     return render_template('roadmap.html') 
-
-@bp.route('/main')
-def main(): 
-    return render_template('main.html') 
 
 
 #유효성 검사를 통해 사전에 에러 방지할 것
@@ -55,10 +50,33 @@ def signup():
         try :
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('views.login'))  
+        except Exception as e :
+            print("error :", e) 
+            return redirect(url_for('views.signup'))  
+        user_project = Project(user_id=user_id,content='') 
+        try : 
+            db.session.add(user_project)
+            db.session.commit()  
+        except Exception as e :
+            print("error :", e)  
+            return redirect(url_for('views.signup'))
+        user_link = Link(user_id=user_id,link_name='',link_content='') 
+        try: 
+            db.session.add(user_link)
+            db.session.commit()
         except Exception as e :
             print("error :", e)
-    return render_template("sign-up.html")
+            return redirect(url_for('views.signup'))
+        user_tag = Tag(user_id =user_id,tag_id='') 
+        try :
+            db.session.add(user_tag)
+            db.session.commit()
+            return redirect(url_for('views.login')) 
+        except Exception as e :
+            print("error :", e)
+            #  return redirect(url_for('views.sign_up')) 
+            return redirect(url_for('views.signup'))
+    return render_template("signup.html")
 
 @bp.route('/update/<int:id>',methods=["POST","GET"])
 def update(id):
@@ -83,3 +101,71 @@ def delete(id):
     except Exception as e :
             print("error :", e)
             return 
+
+@bp.route('/insert/roadmap/items',methods=["POST"])
+def addItems():
+    req = request.get_json()
+    print(req)
+    items = str(req['items'])
+    print(items)
+    try:
+        user_id= session['user_id'] 
+    except :
+        print('error')
+        pass
+    print(user_id)
+    try : 
+        Tag_to_update = Tag.query.filter_by(user_id=user_id).first()
+        Tag_to_update.tag_id = items 
+        db.session.commit() 
+    except Exception as e :
+        print("error :", e)
+        pass
+    return make_response(jsonify('execute'),200)
+    
+@bp.route('/delete/roadmap/items',methods=['POST'])
+def deleteItems():
+    req = request.get_json()
+    print(req)
+    items = str(req['items'])
+    print(items)
+    try:
+        user_id= session['user_id'] 
+    except : 
+        print('error') 
+        pass 
+    try : 
+        Tag_to_update = Tag.query.filter_by(user_id=user_id).first()
+        print(Tag_to_update)
+        Tag_to_update.tag_id = items 
+        db.session.commit() 
+    except Exception as e :
+        print("error :", e)
+        pass
+
+    return make_response(jsonify('execute'),200)
+   
+    
+
+@bp.route('/get/roadmap/items',methods=["POST"])
+def getItems():
+    try:
+        user_id= session['user_id'] 
+        print(user_id)
+    except :
+        print('error') 
+        pass 
+    try :
+        item = Tag.query.filter_by(user_id=user_id).first()
+        Tag_to_get = item.tag_id 
+    except Exception as e:
+        print("error :", e)
+        pass
+    response = Tag_to_get
+    return make_response(jsonify(response),200) 
+
+@bp.route('/main')
+def main():
+    if 'user_id' not in session:
+        return abort(403)
+    return render_template('poseChecker.html')

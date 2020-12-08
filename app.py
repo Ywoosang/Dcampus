@@ -26,16 +26,16 @@ def create_app():
         SESSION_COOKIE_NAME="User_cookie"
     )
     app.config['SQLALCHEMY_DATABASE_URI']  = 'sqlite:///dcampus.db' 
+    from  model import Users
+    import controller
+    import main_views 
     
-    import main_views
-    import controller 
-
     @app.before_request
     def beforerequest():
         session.permanent = True
-        app.permanent_session_lifetime = timedelta(minutes=2)
+        app.permanent_session_lifetime = timedelta(minutes=20)
         try :
-            print(session['user_name'])
+            print(session['user_id'])
         except:
             print('session is not created')
             pass
@@ -44,7 +44,8 @@ def create_app():
     @app.context_processor
     def context_processor():
         try : 
-            username = session['user_name'] 
+            User = Users.query.filter_by(user_id = session['user_id']).first()
+            username = User.user_name
         except :
             username = ''
             pass 

@@ -3,7 +3,6 @@ var vm = new Vue({
     delimiters:['${', '}'],
     data : {
         // server data 
-        username: null,
         login : false, 
     },
     created : function(){
@@ -15,10 +14,7 @@ var vm = new Vue({
             axios.post(`${window.origin}/main/usercheck`)
             .then((response)=>{ 
                 var name = response.data['name']; 
-                console.log(name);
-                console.log(typeof name);
                 if(name != 'guest'){
-                    vm.username = name; 
                     vm.login = true; 
                 }
             })

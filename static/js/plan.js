@@ -73,19 +73,26 @@ function trashPlan(event){
 }; 
 
 
-// fhzjf 
+// 로컬 스토리지 부분
 function saveLocalPlans(plan){
+    console.log(plan);
+    
+    
     let plans;
     if(localStorage.getItem('plans')== null){
         plans = [];
     }else{
         plans = JSON.parse(localStorage.getItem('plans'));
     }
-    console.log(plans);
+    
+
+    console.log(plans); 
     plans.push(plan);
     localStorage.setItem('plans',JSON.stringify(plans))
 }; 
 function removeLocalTodos(plan){
+    console.log(plan);
+
     let plans;
     if(localStorage.getItem('plans')==null){
         plans= []
@@ -97,13 +104,16 @@ function removeLocalTodos(plan){
     plans.splice(planIndex,1);
     localStorage.setItem('plans',JSON.stringify(plans));
 }
-function getLocalPlans(){
+function getLocalPlans(){ 
     let plans;
     if(localStorage.getItem('plans') == null){
         plans =[]; 
     }else{
         plans = JSON.parse(localStorage.getItem('plans'));
     }
+
+
+
     plans.forEach(function(plan,el,all){    
         const planDiv = document.createElement('div');
         planDiv.classList.add('todo');

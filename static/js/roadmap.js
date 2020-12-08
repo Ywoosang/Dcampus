@@ -67,4 +67,81 @@ function init() {
     btn4.addEventListener('click', handleBtn4);
     handleBtn1();
 }
+var links = document.getElementsByTagName('a')
+       
+const server = {
+    links :  links,
+    serverItems : null, 
+    doneItems : [],
+    created : async function(){
+        await this.getItem();
+        await this.addId();
+        console.log(this.serverItems)
+        console.log(this.doneItems)
+        this.doneItems = this.serverItems.split('-');
+        for(let link of this.links){
+            if(this.doneItems.indexOf(link.id) != -1 ){
+                link.classList.add('done');
+            }
+        }
+    },
+    addId : function(){
+        for (let i = 1; i < this.links.length; i++) {
+            links[i].id = i;
+            links[i].onclick = this.toggleComplete.bind(server)
+            //addEventListener('click',this.toggleComplete) 
+        }
+    },
+    getItem : async function(){
+        try{ 
+            let response = await axios.post(`${window.origin}/get/roadmap/items`);
+            console.log(response.data);
+            this.serverItems = String(response.data); 
+        }catch(error){
+            alert(error)
+        }
+    }, 
+    addItem : async function(dom){
+        let id = dom.id;
+        this.doneItems.push(id);
+        let itemString = this.doneItems.slice().join('-');
+        let request = {
+            items : itemString
+        }
+        console.log(request) 
+        try{
+            await axios.post(`${window.origin}/insert/roadmap/items`,request) 
+        }catch(error){
+            alert(error)
+        }
+    },
+    deleteItem : async function(dom){
+        let id = dom.id
+        this.doneItems.splice(this.doneItems.indexOf(id),1);
+        let itemString = this.doneItems.slice().join('-');
+        let request = {
+            items : itemString
+        }
+        console.log(request);
+        try{
+            await axios.post(`${window.origin}/delete/roadmap/items`,request)
+        }catch(error){
+            alert(error)
+        }
+        //서버로 보내서 해당 아이템 삭제
+    },
+    toggleComplete : function(e){
+        console.log(this)
+        if(e.target.classList.contains('done')){
+            console.log(this)
+            this.deleteItem(e.target);
+        }else{
+            this.addItem(e.target); 
+        }
+        e.target.classList.toggle('done');
+    },
+     
+    
+};
 init();
+server.created();
