@@ -76,15 +76,14 @@ const server = {
     created : async function(){
         await this.getItem();
         await this.addId();
-        console.log(this.serverItems)
-        console.log(this.doneItems)
         this.doneItems = this.serverItems.split('-');
+        let cnt =0;
         for(let link of this.links){
-            if(this.doneItems.indexOf(link.id) != -1 ){
+            if(this.doneItems.indexOf(link.id) != -1 && cnt !== 0){
                 link.classList.add('done');
             }
+            cnt ++;
         }
-        links.indexOf(0).classList.remove('done')
     },
     addId : function(){
         for (let i = 1; i < this.links.length; i++) {
@@ -96,7 +95,6 @@ const server = {
     getItem : async function(){
         try{ 
             let response = await axios.post(`${window.origin}/get/roadmap/items`);
-            console.log(response.data);
             this.serverItems = String(response.data); 
         }catch(error){
             alert(error)
@@ -109,7 +107,6 @@ const server = {
         let request = {
             items : itemString
         }
-        console.log(request) 
         try{
             await axios.post(`${window.origin}/insert/roadmap/items`,request) 
         }catch(error){
@@ -123,7 +120,6 @@ const server = {
         let request = {
             items : itemString
         }
-        console.log(request);
         try{
             await axios.post(`${window.origin}/delete/roadmap/items`,request)
         }catch(error){
@@ -132,9 +128,7 @@ const server = {
         //서버로 보내서 해당 아이템 삭제
     },
     toggleComplete : function(e){
-        console.log(this)
         if(e.target.classList.contains('done')){
-            console.log(this)
             this.deleteItem(e.target);
         }else{
             this.addItem(e.target); 
