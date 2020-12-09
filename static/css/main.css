@@ -1,6 +1,6 @@
 /* main */
 body{
-    position: relative;
+    position: relative !important;
     height: 100vh;
 }
 header {
@@ -164,9 +164,6 @@ header {
 }
 footer {
     margin-top:500px;
-    bottom: 0; 
-    position: absolute;
-    bottom: 0;
     display: flex;
     width: 100vw;
     flex-direction: column;
@@ -209,13 +206,11 @@ footer {
     }
     .gnb{
         width : 80%;
-    
     }
 }
 @media screen and (max-width:760px) {
     .main-des{
         display:none;
-      
     }
     .gnb,footer{
         display: none;

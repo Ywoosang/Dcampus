@@ -12,8 +12,8 @@
     {% block link %} {% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
-    <p style="position:absolute;">{{ makeAlert | safe }} </p> 
+<body style="overflow-x:hidden;">
+    <p style="position:absolute; color:transparent;">{{ makeAlert | safe }} </p> 
     <div class="app-main">
     <header style="background-color : #711612">
         <div class="title"  style="background-color : #711612">

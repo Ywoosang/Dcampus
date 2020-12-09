@@ -168,7 +168,7 @@ class PoseChecker {
         this.graph.appendChild(this.graph_canvas);
         this.cam_ctx = this.cam_canvas.getContext('2d');
         this.graph_ctx = this.graph_canvas.getContext('2d');
-
+        this.warningAudio = document.getElementById('warningAudio'); 
         this.init();
     }
 
@@ -185,8 +185,10 @@ class PoseChecker {
 
         await this.webcam.setup();
         await this.webcam.play();
-
+        
         this.runChecker(this.loop, 40);
+       
+            
     }
 
     resize = () => {
@@ -268,8 +270,7 @@ class PoseChecker {
     }
 
     giveWarning = () => {
-        const beepSound = new Audio('./beep.mp3');
-        beepSound.play();
+        this.warningAudio.play();
     }
 
     drawPose = (pose) => {

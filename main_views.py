@@ -11,8 +11,13 @@ def root():
     users = Users.query.order_by(Users.id) 
     return render_template('index.html',users = users)
 
+
+
+
+ 
 @bp.route('/login',methods=["GET","POST"])
-def login():
+@bp.route('/login/<makeAlert>',methods=["GET","POST"])
+def login(makeAlert=None):
     if request.method == "POST":
         session.pop('user_id', None) 
         user_id = request.form.get('Id')
@@ -24,7 +29,7 @@ def login():
                 return redirect(url_for('views.root'))
         makeAlert ="""<script>alert("로그인 오류")</script>"""
         return render_template("login.html",makeAlert=makeAlert)
-    return render_template('login.html')
+    return render_template('login.html',makeAlert=makeAlert)
 
 @bp.route('/project')
 def project():
@@ -74,6 +79,7 @@ def signup():
             return redirect(url_for('views.login')) 
         except Exception as e :
             print("error :", e)
+            makeAlert ="""<script>alert("환영합니다 회원님")</script>"""
             return redirect(url_for('views.signup',makeAlert=makeAlert))
     return render_template("signup.html")
 

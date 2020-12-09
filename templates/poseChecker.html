@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/poseChecker.css') }}">
 {% endblock %}
 {% block main %}
+    <audio id="warningAudio">
+        <source src="./beep.mp3" type="audio/mpeg" />
+    </audio>
     <div id="wholeWrap">
         <div id="timer">
             <div></div>
