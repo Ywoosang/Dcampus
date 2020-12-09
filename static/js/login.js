@@ -11,13 +11,9 @@ const validate = {
         this.user_passwd.onclick = this.resetPasswd.bind(validate);
         this.user_email.onkeyup = this.spaceCheck.bind(validate,this.user_email);
         this.user_passwd.onkeyup= this.spaceCheck.bind(validate,this.user_passwd);
+       
     },
-    reset : function(){
-        // this.user_email.value = '이메일을 입력해 주세요';
-        // this.user_passwd.value ='비밀번호를 입력해 주세요'; 
-        this.user_passwd.type = 'text';
-        
-    },
+   
     formCheck : function(e){
         const check1 =  /[0-9]/;    //숫자 포함 여부
         const check2 = /[a-zA-Z]/;  //문자 포함 여부
@@ -64,7 +60,8 @@ const validate = {
             alert('값을 입력해 주세요')
             return true 
         }
-    }
+    }, 
+    
 }
 validate.setEvent();
  

@@ -66,7 +66,8 @@ const validate = {
             alert('값을 입력해 주세요')
             return true 
         }
-    }
+    },
+
 }
 validate.setEvent();
  

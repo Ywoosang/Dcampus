@@ -46,6 +46,14 @@ var vm = new Vue({
                 window.location.href= `${window.origin}/login`;
             }
         },
+        goLinks : function(){
+            if(this.login === true){
+                window.location.href= `${window.origin}/links`;
+            }else{
+                alert('로그인해주세요') 
+                window.location.href= `${window.origin}/login`;
+            }
+        },
         logout : function(){
             axios.get('/logout')
             .then((response)=>{

@@ -1,4 +1,8 @@
 /* main */
+body{
+    position: relative;
+    height: 100vh;
+}
 header {
     display: none;
 }
@@ -158,10 +162,43 @@ header {
 .left-top:hover{
     opacity: 0.9;
 }
-
+footer {
+    margin-top:500px;
+    bottom: 0; 
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    color: white;
+    font-size: 14px;
+}
+.head {
+    display: flex;
+    height: 74px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #242424bf;
+}
+.head div {
+    margin-left: 30px;
+    height: 60px;
+    line-height: 60px;
+}
+.bottom {
+    background-color: #1f1f1fa8;
+    height: 100px;
+}
+.head div i {
+    margin-top: 6px;
+    color: white;
+    font-size: 45px;
+    margin: 6px 10px 0 10px;
+}
 @media screen and (max-width:1310px) {
     .main{
         width : auto;
+        margin-top: 100px;
     }
     .main-title {
         display: none;
@@ -178,8 +215,9 @@ header {
 @media screen and (max-width:760px) {
     .main-des{
         display:none;
+      
     }
-    .gnb{
+    .gnb,footer{
         display: none;
     }
 

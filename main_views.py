@@ -1,6 +1,7 @@
 from flask import Blueprint,render_template,request,session,redirect,url_for,abort,make_response,jsonify
 from  model import Users,Project,Link,Tag
 from  app import db
+from sqlalchemy import and_
 
 
 bp = Blueprint('views', __name__, url_prefix='/')
@@ -37,8 +38,13 @@ def roadmap():
         return abort(403)
     return render_template('roadmap.html') 
 
+@bp.route('/pose')
+def pose():
+    if 'user_id' not in session:
+        makeAlert ="""<script>alert("로그인 해주세요")</script>"""
+        return render_template('login.html',makeAlert=makeAlert)
+    return render_template('poseChecker.html') 
 
-#유효성 검사를 통해 사전에 에러 방지할 것
 @bp.route('/signup',methods=["GET","POST"])
 def signup():
     if request.method == "POST":
@@ -60,13 +66,7 @@ def signup():
         except Exception as e :
             print("error :", e)  
             return redirect(url_for('views.signup'))
-        user_link = Link(user_id=user_id,link_name='',link_content='') 
-        try: 
-            db.session.add(user_link)
-            db.session.commit()
-        except Exception as e :
-            print("error :", e)
-            return redirect(url_for('views.signup'))
+       
         user_tag = Tag(user_id =user_id,tag_id='') 
         try :
             db.session.add(user_tag)
@@ -74,8 +74,7 @@ def signup():
             return redirect(url_for('views.login')) 
         except Exception as e :
             print("error :", e)
-            #  return redirect(url_for('views.sign_up')) 
-            return redirect(url_for('views.signup'))
+            return redirect(url_for('views.signup',makeAlert=makeAlert))
     return render_template("signup.html")
 
 @bp.route('/update/<int:id>',methods=["POST","GET"])
@@ -164,8 +163,69 @@ def getItems():
     response = Tag_to_get
     return make_response(jsonify(response),200) 
 
-@bp.route('/main')
-def main():
+
+@bp.route('/insert/link',methods=["POST"]) 
+def addlinks():
+    req = request.get_json()
+    link_name = req['name']
+    link_content = req['content']
+    try:
+        user_id= session['user_id'] 
+    except :
+        print('error')
+        pass
+    user_link = Link(user_id=user_id,link_name=link_name,link_content=link_content) 
+    try: 
+        db.session.add(user_link)
+        db.session.commit()
+    except Exception as e :
+        print("error :", e)
+        pass 
+    return make_response(jsonify('execute'),200)
+
+
+@bp.route('/delete/link',methods=["POST"]) 
+def deletelinks(): 
+    req = request.get_json()
+    link_name = req['name']
+    link_content = req['content']
+    try:
+        user_id= session['user_id'] 
+    except :
+        print('error')
+        pass
+    user_links = Link.query.filter_by(user_id=user_id).all() #인스턴스를 전부 가져옴
+    for link in user_links :
+        if link.link_name == link_name and link.link_content == link_content : 
+            db.session.delete(link) 
+            db.session.commit() 
+    return make_response(jsonify('execute'),200)
+
+@bp.route('/get/links',methods=["POST"]) 
+def getlinks():
+    try:
+        user_id= session['user_id'] 
+    except :
+        print('error')
+        pass
+    response = {}
+    try : 
+        user_links = Link.query.filter_by(user_id=user_id).all() #인스턴스를 전부 가져옴
+        print(user_links)
+        for link in user_links :
+            response[link.link_name] = link.link_content 
+    except :
+        print('링크 아직 없음')
+        return make_response(jsonify('execute'),200)
+    return make_response(jsonify(response),200) 
+     
+@bp.route('/links')
+def linkPage():
     if 'user_id' not in session:
         return abort(403)
-    return "계속되는 야근으로 과로사 직전입니다."
+    return render_template('link.html') 
+
+     
+
+
+

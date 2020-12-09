@@ -1,113 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <style>
-        .main {
-            padding-top : 30px;
-            margin: 0 auto;
-            width: 50%;
-            border: 1px solid red;
-            text-align: center;
-        }
-        .input-container {
-            margin: 0 auto;
-         
-            border: 1px solid red;
-            width: 70%;
-        }
-        .input-height{
-            height:  28px !important; 
-            font-size : 20px;
-        }
-        .input-box {
-            box-sizing: border-box; 
-            border: 1px solid red;
-            display: block;
-            margin: 0 auto;
-            width: 100%;
-            height: 60px;
-            color: black;
-        }
-        h1 {
-            color: black;
-        }
-        .link-area{
-            margin-top: 30px;
-            
-            border: 1px solid black;
-        }
-        div.link-submit{
-            display: inline-block;
-            width : 550px; 
-            margin : 30px;
-        }
-        .submit-btn{
-            color: white; 
-            background-color: #253269; 
-            width : 200px;
-            height: 40px;
-            font-size: 20px;
-        }
-        .submit-btn:hover{
-            opacity: 0.9;
-        }
-        @media screen and (max-width:1000px) {
-            .main{
-                 width: 80%;
-            }
-            .input-container{
-                width : inherit; 
-            }
-            div.link-submit{
-                margin : 0 auto;  
-                width : 80%;
-            }
-        }
-    </style>
-</head>
-
-<body>
+{% extends "default.html" %}
+{% block title %}Dcampus>링크저장소{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/link.css') }}">
+{% endblock %}
+{% block main %}
     <div class="wrapper">
         <section class="main">
-            <form>
+            <form action="/n">
                 <div class="input-container">
                     <h1>링크를 등록하세요</h1>
-                    <input type="text" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
-                    <textarea class="input-box"></textarea>
-                    <button class="submit-btn">링크 등록하기</button>
+                    <input type="text" autocomplete="off" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
+                    <textarea class="input-box" id="content-area" spellcheck="false"></textarea>
+                    <button type="button" class="submit-btn" id="submit-btn">링크 등록하기</button>
                 </div>
             </form>
         </section>
         <section class="link-area">
-          <div class="link-submit"> 
-           <input type="text" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
-           <textarea class="input-box"></textarea>
-            </div> 
-             <div class="link-submit"> 
-           <input type="text" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
-           <textarea class="input-box"></textarea>
-            </div> 
-             <div class="link-submit"> 
-           <input type="text" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
-           <textarea class="input-box"></textarea>
-            </div> 
-             <div class="link-submit"> 
-           <input type="text" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
-           <textarea class="input-box"></textarea>
-            </div> 
-             <div class="link-submit"> 
-           <input type="text" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
-           <textarea class="input-box"></textarea>
-            </div> 
-             <div class="link-submit"> 
-           <input type="text" class="input-box input-height" id="link-name" placeholder="링크 이름을 입력해 주세요" autofocus required>
-           <textarea class="input-box"></textarea>
-            </div> 
         </section>
     </div>
-
-</body></html>
+{% endblock %}
+{% block script %}
+<script src="{{ url_for('static',filename='js/link.js') }}"></script>
+{% endblock %}

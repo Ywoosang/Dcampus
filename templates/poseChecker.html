@@ -1,0 +1,27 @@
+{% extends "default.html" %}
+{% block title %}Dcampus/자세측정{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/poseChecker.css') }}">
+{% endblock %}
+{% block main %}
+    <div id="wholeWrap">
+        <div id="timer">
+            <div></div>
+            <div><h1 id="showTime"></h1></div>
+            <div id="buttons">
+                <button id="startTimer">시작</button>
+                <button id="stopTimer">중지</button>
+                <button id="endTimer">초기화</button>
+            </div>
+        </div>
+        <div id="cam"></div>
+        <div id="status__graph"></div>
+        <div id="status__word">
+            <p id="good">Good</p>
+            <p id="bad">Bad</p>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script src="{{ url_for('static',filename='js/poseChecker.js') }}"> </script>
+{% endblock %}

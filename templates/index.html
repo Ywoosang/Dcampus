@@ -60,13 +60,13 @@
         </div>
         <div class="main-nav box">
             <div class="go-roadmap left-top">
-                <a @click="goRoadmap">
-                    <h5>Rodamap 가기</h5>
-                    <p>관련 강좌 제공</p>
+                <a href='/pose' target ="blank">
+                    <h5>Pose Check</h5>
+                    <p>새창에서 제공</p>
                 </a>
             </div>
             <div class="go-main left-top">
-                <a href="/main">
+                <a @click="goRoadmap"> 
                     <i style="color:white; font-size:60px; margin-bottom: 10px;" class="fa fa-university"></i>
                     <h5>d-campus 가기</h5>
                     <p>(온라인 학습실)</p>
@@ -79,7 +79,7 @@
                 </a>
             </div>
             <div class="go-link left-bottom">
-                <a href="/">
+                <a @click="goLinks">
                     <h5>link 저장소 가기</h5>
                     <p>(개인별)</p>
                 </a>
@@ -92,7 +92,7 @@
         <template v-if="login">
             <a>안녕하세요 {{ username }} 님</a>
             <a></a>
-        </template>
+        </template>s
         <template v-else> 
         <a href="/login" class="gnb-login">로그인</a>
         <a href="/signup" class="gnb-signup">회원가입</a> 
@@ -106,6 +106,13 @@
     {% endfor %}
 </section>   -->
 </div>
+<footer>
+    <div class="head">
+        <div>[공지] 당신 ! 다다익선조 혐오를 멈춰주세요 <span style="color: crimson;">♥</span></div>
+        <div><i class="fa fa-git-square"></i><i class="fa fa-instagram"></i><i style="margin-right:50px;"class="fa fa-facebook-official"></i></div>
+    </div>
+    <div class="bottom"> </div>
+</footer>
 {% endblock %}
 {% block script %}
 <script src="{{ url_for('static',filename='js/default.js') }}"> </script>
