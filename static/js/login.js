@@ -6,7 +6,6 @@ const validate = {
     user_passwd : document.getElementById('inputPassword'),
     inputTag : document.getElementsByClassName('input'),
     setEvent : function(){
-        window.onload = this.reset.bind(validate)
         this.form.onsubmit = this.formCheck.bind(validate)
         this.user_email.onclick = this.resetInput.bind(validate);
         this.user_passwd.onclick = this.resetPasswd.bind(validate);
@@ -67,7 +66,6 @@ const validate = {
         }
     }
 }
-validate.reset();
 validate.setEvent();
  
  

@@ -7,7 +7,6 @@ const validate = {
     user_passwd : document.getElementById('inputPassword'),
     inputTag : document.getElementsByClassName('input'),
     setEvent : function(){
-        window.onload = this.reset.bind(validate)
         this.form.onsubmit = this.formCheck.bind(validate)
         this.user_name.onclick = this.resetInput.bind(validate);
         this.user_email.onclick = this.resetInput.bind(validate);
@@ -27,7 +26,6 @@ const validate = {
             location.reload();
             return
         }
-        
         if(this.user_name.value.length<2 || check1.test(this.user_name.value) || check3.test(this.user_name.value)){
             this.user_name.value = '숫자또는 특수 문자는 포함하실 수 없습니다.';
             this.user_name.style.backgroundColor = '#ffe0e0';
@@ -70,7 +68,6 @@ const validate = {
         }
     }
 }
-validate.reset();
 validate.setEvent();
  
  
