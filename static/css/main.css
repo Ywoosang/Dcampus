@@ -10,6 +10,10 @@ header {
 .wrapper {
     display: flex;
     justify-content: center;
+  
+}
+.app-main{
+    min-height: calc(100vh - 175px);
 }
 
 .main {
@@ -162,14 +166,10 @@ header {
 .left-top:hover{
     opacity: 0.9;
 }
-.space{
-    height: 600px;
-}
+
 footer {
-    position :absolute;
-    bottom: 0; 
+    margin-top: 100px;
     display: flex;
-    width: 100vw;
     flex-direction: column;
     color: white;
     font-size: 14px;
