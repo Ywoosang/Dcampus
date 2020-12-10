@@ -165,7 +165,7 @@ header {
 footer {
     margin-top:300px;
     display: flex;
-    width: 100vw;
+    width: 100vw;.
     flex-direction: column;
     color: white;
     font-size: 14px;
@@ -206,6 +206,9 @@ footer {
     }
     .gnb{
         width : 80%;
+    }
+    footer{
+        display: none;
     }
 }
 @media screen and (max-width:760px) {
