@@ -162,15 +162,20 @@ header {
 .left-top:hover{
     opacity: 0.9;
 }
+.space{
+    height: 500px;
+}
 footer {
-    margin-top:300px;
+    position :absolute;
+    bottom: 0; 
     display: flex;
-    width: 100vw;.
+    width: 100vw;
     flex-direction: column;
     color: white;
     font-size: 14px;
 }
 .head {
+    width:inherit;
     display: flex;
     height: 74px;
     justify-content: space-between;
@@ -183,6 +188,7 @@ footer {
     line-height: 60px;
 }
 .bottom {
+    width:inherit;
     background-color: #1f1f1fa8;
     height: 100px;
 }
