@@ -31,10 +31,10 @@
  
 
 ## 환경
-python version: 3.9.0
-Flask==1.1.2
-SQLAlchemy==1.3.20
-gunicorn==20.0.4
+python version: 3.9.0  
+Flask==1.1.2  
+SQLAlchemy==1.3.20  
+gunicorn==20.0.4  
 
   
 <br>
