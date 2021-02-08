@@ -7,6 +7,7 @@ const { sequelize, User, Link, Project } = require('./models');
 const { QueryTypes } = require('sequelize');
 const { Op } = require("sequelize");
 const session = require('express-session');
+const favicon = require('serve-favicon'); 
 
 app.set('view engine', 'html');
 nunjucks.configure('views', {
@@ -37,15 +38,14 @@ app.use(session({
 // css,js 정적파일 경로 설정  css/파일명 으로 연결 가능
 app.use('/css', express.static('./static/css'))
 app.use('/js', express.static('./static/js'))
+app.use(favicon(path.join(__dirname,'static/img','favicon.ico')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 app.use((req,res,next)=>{
     if(req.session.user){
-        console.log('로그인중',req.session);
         req.data = req.session.user;
     }else{
-        console.log('로그아웃중',req.session);
     }
     next();
 })
@@ -136,7 +136,7 @@ app.route('/login')
         res.status(302).redirect('/signup');
     }
     );
-
+ 
 app.get('/logout',(req,res)=> {
     if(req.session.user){
         req.session.destroy(()=>{
@@ -147,24 +147,87 @@ app.get('/logout',(req,res)=> {
     res.status(302).redirect('/')
 })
 
-app.get('/link',(req,res)=>{
+app.route('/link')
+.get(async(req,res)=>{
+    if(!req.data){
+        res.status(302).redirect('/'); 
+        return;
+    }
     const id = req.data.id
-    res.render('link')
-});
+    const links = await Link.findAll({
+        attributes : [ "id","name","content"],
+        where :{
+            UserId  : {
+                [Op.eq] : id 
+            }
+        }
+    });
+    const responseArray = []; 
+    links.forEach(item=>{
+        let obj = {} 
+        obj.linkId = item.dataValues.id; 
+        obj.linkName = item.dataValues.name;
+        obj.linkUrl = item.dataValues.content;
+        responseArray.push(obj);
+    }); 
+    res.render('link',{links:responseArray})
+})
+.post(async (req,res)=>{
+    const linkName = req.body.linkName;
+    const linkUrl = req.body.linkUrl;
+    const id = req.data.id; 
+    try{
+        const link = await Link.create({
+                name : linkName,
+                content : linkUrl,
+                createdAt: Date.now(),
+                updatedAt:  Date.now(),
+                UserId : id
+            });
+        console.log('링크아이디',link.id);
+        res.json({linkId:link.id}); 
+    }catch(err){
+        next(err);
+    }
+})
+
+app.delete('/link/:id',(req,res,next)=>{
+    const linkId = req.params.id;
+    console.log(req.params);
+    Link.destroy({
+        where: {
+            id : {
+                [Op.eq] : Number(linkId) 
+            }
+        }
+    }).then((response)=>{
+        console.log(response);
+        res.json({ success : '삭제 되었습니다.'});
+    }).catch((error)=>{
+        res.json({ warn :'처리 중 오류가 발생했습니다. 다시 시도해주세요.'}); 
+        next(error);
+    });
+}); 
 
 app.get('/project',(req,res)=>{
-    res.render('project')
+    if(!req.data){
+        res.status(302).redirect('/'); 
+        return;
+    }
+    res.render('project');
 }); 
 
 app.get('/community',(req,res)=>{
-    res.render('community')
-})
-
-
+    if(!req.data){
+        res.status(404).redirect('/'); 
+        return;
+    }
+    res.render('community');
+}); 
 
 // 404 처리 
 app.use((req, res, next) => {
-    res.send('404 not found')
+    res.send('404 not found');
 });
 
 // error 처리 
