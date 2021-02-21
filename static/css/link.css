@@ -1,102 +1,133 @@
-.main {
-    padding-top: 30px;
-    margin: 0 auto;
-    width: 50%;
-    text-align: center;
-}
-.input-container,
-.input-container input,
-.input-container textarea,
-.input-container h1 {
-    margin: 5px 0;
+textarea,input{
     outline: none;
-    border: none;
 }
-.input-container {
-    margin: 0 auto;
-    width: 70%;
-    border-radius: 8px;
-    box-shadow: 3px 3px 5px #ddd;
-}
-.input-container textarea {
-    font-size: 18px;
-    color: rgb(0, 44, 255);
-}
-.input-height {
-    height: 28px !important;
-    font-size: 20px;
-
-}
-.input-box {
-    box-sizing: border-box;
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: 60px;
-    color: black;
-}
-h1 {
-    color: black;
-}
-.link-area {
-    margin-top: 30px;
-}
-div.link-submit {
-    display: inline-block;
-    width: 550px;
-    margin: 30px;
-    border-radius: 18px;
-    background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: 2px 2px 3px #ddd;
-    text-align: center;
+.main {
+    width:100vw;
     position: relative;
 }
-.submit-btn {
-    color: white;
+/* 등록 버튼 부분 */
+.plus-plan {
+    width: inherit;
+    height: 70px;
+}
+/* JS 로 클릭하면 추가창의 display 바꾸기 */
+.add-btn {
     background-color: #253269;
-    width: 200px;
+    width: 170px;
     height: 40px;
+    margin:15px 0 0 50px;
+    display: block;
     font-size: 20px;
-    margin: 7px;
-}
-.submit-btn:hover {
-    opacity: 0.9;
-}
-.link-name {
-    height: 40px;
-    font-size: 20px;
-    line-height: 40px;
-}
-.delete {
-    position: absolute;
-    top: 8px;
-    right: 40px;
-    font-size: 20px;
-    width: 80px;
-    padding: 2px;
-    background-color: orange;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px #ddd;
     color: white;
+    border: none;
+    border-radius: 9px;
+    transition : 0.5s;
 }
-.delete:hover {
+.add-btn:hover{
     background-color: crimson;
+    opacity: 0.7; 
 }
-@media screen and (max-width:1000px) {
-    .main {
-        width: 80%;
-    }
-    .input-container {
-        width: inherit;
-    }
-    .link-area {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    div.link-submit {
-        width: 80%;
-    }
+
+/* 등록하는 링크 부분 */
+.link{
+    display:flex;
+    width : 100%;
+    height : calc(100vh - 370px);
+    flex-wrap: wrap;
+    overflow: auto;
 }
+.link-content{
+    width : 40vw;
+    height:155px;
+    margin : 30px 4%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 2px 2px 5px #ddd;
+}
+.link-delete,.link-copy{
+    position : absolute;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    box-shadow: 1px 1px 3px #ddd;
+    top : -30px;
+    height: 30px;
+    padding: 0 10px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+.link-delete{
+    left : 0;
+    background-color: rgb(224, 58, 58);
+}
+.link-copy{
+    left : 70px;
+    background-color: #FACE01;
+}
+.link-delete:hover,.link-copy:hover{
+     background-color: black;
+}
+
+.link-name{
+    width : 87%;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.link-url{
+    margin: 10px 0;
+    width:87%;
+    height: 70px;
+    background-color : rgba(218, 218, 218, 0.897);
+    resize: none;
+    overflow: auto;
+    color : #0645AD; 
+}
+/* 등록하는 링크부분  */
+.enroll{
+    position :absolute;
+    top: 20%;
+    left:50%;
+    transform: translate(-50%);
+}
+.enroll-content{
+    z-index: 1001;
+    opacity: 1;
+    padding-top: 10px;
+    background-color: rgb(49, 48, 48);
+    width : 40vw;
+    height: 320px;
+    border-radius: 8px; 
+}
+.enroll-name{
+    position:relative;
+    font-size: 30px;
+}
+.enroll-url{
+    height: 200px;
+}
+.enroll-button{
+    margin-bottom: 10px; 
+    font-size: 20px;
+}
+.cancel-button{
+    position:absolute; 
+    left: 0;
+    top : 0;
+    color:white;
+    font-size: 31px;
+    background-color: transparent;
+    border:none;
+}
+
+ /* 모바일에 적용될 스타일 */
+@media screen and (max-width: 768px) {
+    .cancel-button {
+        font-size : 27px;
+    }
+    
+}
+
+ 
+

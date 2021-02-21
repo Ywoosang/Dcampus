@@ -17,7 +17,15 @@ h4,
 h5,
 h6 {
     margin: 0;
-    color: rgba(255, 255, 255, 0.92);
+    /* color: rgba(255, 255, 255, 0.92); */
+    color:black;
+}
+i{
+    pointer-events: none;
+}
+html,body{
+    height: 100%;
+    overflow: hidden;
 }
 a {
     text-decoration: none;
@@ -54,4 +62,45 @@ header .title a {
 .done{
     background-color : #9ce9aa !important;
     opacity: 0.8 !important;
+}
+/* 자바스크립트로 효과 추가/제거 class */
+.hide{
+    display:none;
+}
+.blur{
+    opacity: 0.4;
+}
+/* footer */
+footer {
+    width:100%;
+    position:absolute;
+    bottom:0;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 14px;
+}
+.head {
+    width:inherit;
+    display: flex;
+    height: 74px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #242424bf;
+}
+.head div {
+    margin-left: 30px;
+    height: 60px;
+    line-height: 60px;
+}
+.bottom {
+    width:inherit;
+    background-color: #1f1f1fa8;
+    height: 100px;
+}
+.head div i {
+    margin-top: 6px;
+    color: white;
+    font-size: 45px;
+    margin: 6px 10px 0 10px;
 }
