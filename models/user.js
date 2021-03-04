@@ -13,10 +13,13 @@ module.exports = function(sequelize,DataTypes){
             type : DataTypes.STRING(20),
             allowNull : false
         },
+        authId : {
+            type : DataTypes.INTEGER(11),
+        }
     });
-    // models 에는 db 오브젝트가 들어간다. 
+    // models 는 db 오브젝트
     user.associate = function(models){
-        // Link 는 설정한 모델 이름이다.  
+        // Link 는 설정한 모델 이름
         user.hasMany(models.Link); 
     };
     user.associate = function(models){
