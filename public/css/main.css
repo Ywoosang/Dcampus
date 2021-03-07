@@ -155,9 +155,6 @@ header {
     background-color: rgba(0, 0, 0, 0.45);
     margin: 6px 6px
 }
-.evt-spr{
-    pointer-events: none;
-}
 
 /*nav */
 .warn {

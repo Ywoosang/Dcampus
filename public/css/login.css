@@ -6,7 +6,6 @@
 .main div.center{
     border : 1px solid #EEEEEE; 
     width: 524px;
-    height: 485px; 
     text-align: center;
     display: flex; 
     align-items: center;
@@ -19,7 +18,6 @@
     display : flex; 
     flex-direction : column;
     align-items: center;
-    height: 329px;
     width: 524px;
     font-size: 0; 
     margin:0 auto; 
@@ -60,18 +58,39 @@
 .main .center article button{
     display : inline-block;
     padding: 10px; 
-    background-color:#253269;
     font-weight : 400; 
-    font-size : 28px;
+    margin-bottom: 10px;
     color: white;
     width: 461px;
-    height: 60px; 
     border: none; 
 }
-
-.main .center article button:hover{
-    background-color: #1B2550 ;  
+.main .center article .local{
+    background-color:#253269;
+    height: 60px; 
+    font-size : 28px;
 }
+.main .center article .local:hover{
+    background-color: #1B2550 ;
+     
+     
+}
+.main .center article .kakao{
+    background-color: #FAD202;
+    font-size: 20px;
+
+    height : 50px;
+    font-weight: 600;  
+}
+.main .center article .github{
+    background-color: black;
+    font-size: 20px;
+    height: 50px;
+    font-weight: 500;  
+}
+
+ 
+
+/* 개인정보 처리방침 */
 .main article.bottom{
     width : 100%;
     height: 105px; 
