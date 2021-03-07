@@ -1,23 +1,30 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const nunjucks = require('nunjucks');
 const app = express();
 const { sequelize } = require('./models');
 const session = require('express-session');
 const favicon = require('serve-favicon'); 
 // Mysql 세션저장 
 const MySQLStore = require('express-mysql-session')(session);
-const fileUpload = require('express-fileupload');  
+//
+const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv'); 
+const passport = require('passport'); 
+const passportConfig = require('./passport'); 
+
 // 라우터
 const indexRouter = require('./routes');
 const profileRouter = require('./routes/profile.js'); 
-const signupRouter = require('./routes/signup.js');
-const loginRouter = require('./routes/login.js'); 
-const logoutRouter = require('./routes/logout.js'); 
+const authRouter = require('./routes/auth.js');
 const linkRouter = require('./routes/link.js'); 
 const projectRouter = require('./routes/project.js'); 
 const communityRouter = require('./routes/community.js'); 
+ 
+const nunjucks = require('nunjucks'); 
+
+// dotenv
+dotenv.config(); 
 
 // mysql 세션 설정 
 const options = {
@@ -31,27 +38,52 @@ const sessionStore = new MySQLStore(options);
 
 // nunjucks 템플릿 엔진 
 app.set('view engine', 'html');
-nunjucks.configure('views', {
+
+const env = nunjucks.configure('views', {
     express: app,
     watch: true,
 });
 
+env.addFilter('dateform',function (str) {
+    const date = new Date(str) 
+    const year = date.getFullYear();
+    const month = (date.getMonth() +1);
+    const day = date.getDate();
+    return `${ year}년 ${month} 월 ${ day } 일`;
+});
+ 
+
+
+
+
 // port 변수 설정 
 app.set('port', process.env.PORT || 8080);
 
-// express-fileupload 이용
-app.use(fileUpload()); 
-
-// css,js 정적파일 경로 설정 
-app.use('/css', express.static('./static/css')); 
-app.use('/js', express.static('./static/js')); 
+// morgan 
 app.use(morgan('dev'));
+// css,js 정적파일 경로 설정 
+ 
+// parser 
+app.use(express.json());
+
+// form 데이터라도 urlincoded 로 보내는 경우에는 아래 미들웨어에서 처리해준다
+// enctype 이 multipart/form-data 인 경우에는 못바꿔줌
+// 이럴 때 multer 를 사용하면  multipart/form-data을 해석할 수 있다.
+// 
+app.use(express.urlencoded({ extended: true }));
+// 
+app.use(express.static(path.join(__dirname,'public')));
+app.use('/img',express.static(path.join(__dirname,'uploads')));
+app.use(favicon(path.join(__dirname,'public/img','favicon.ico')));
+// cookie-parser
+app.use(cookieParser()); 
+
 
 // 세션 등록 
 app.use(session({
     // 어디에 저장할 지
-    port : 3307,
-    secret: "ywoosang",
+    port : process.env.MYSQL_PORT,
+    secret: process.env.COOKIE_SECRET,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
@@ -63,12 +95,11 @@ app.use(session({
     },
     name: "user"//default : connect.sid  
 }));
-app.use(favicon(path.join(__dirname,'static/img','favicon.ico')))
 
-// parser 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
-
+// passport 등록
+app.use(passport.initialize());
+app.use(passport.session()); 
+passportConfig(); 
 // 세션 검증 미들웨어 
 app.use((req,res,next)=>{
     if(req.session.user){
@@ -79,7 +110,7 @@ app.use((req,res,next)=>{
 })
 
 // 시퀄라이즈 모델 생성(연결)
-sequelize.sync({ force:true })
+sequelize.sync({ force:false})
     .then(() => console.log('connection success'))
     .catch((err) => console.log(err));
  
@@ -88,12 +119,10 @@ sequelize.sync({ force:true })
 // 메인페이지
 app.use('/',indexRouter); 
 app.use('/',profileRouter)
-app.use('/',signupRouter);
-app.use('/',loginRouter);
-app.use('/',logoutRouter);
 app.use('/',linkRouter);
 app.use('/',projectRouter);
-app.use('/',communityRouter);
+app.use('/community',communityRouter);
+app.use('/auth',authRouter); 
 
 // 404 처리 
 app.use((req, res, next) => {
