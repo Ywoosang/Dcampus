@@ -11,7 +11,7 @@ module.exports = function(sequelize,DataTypes){
     });
     // 
     link.associate = function(models) {
-        link.belongsTo(models.User,{ foreignKey : {name: 'userId',allowNull:false},onDelete:'CASCADE'});
+        link.belongsTo(models.User,{ foreignKey :{ allowNull:false},onDelete:'CASCADE'});
     }
     return link; 
 
