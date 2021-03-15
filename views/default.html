@@ -2,34 +2,81 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <link rel="stylesheet" href="css/style.css">
-    {% block link %} {% endblock %}
+    {% block link %}
+    {% endblock %}
+    <link rel="stylesheet" href="/css/style.css">
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body style="overflow-x:hidden;">
-    <header style="background-color : #711612">
-    <div class="title"  style="background-color : #711612">
-        <a href='/' style="background-color : #711612">D-campus</a>
+<body>
+    <div class="wrapper">
+        <div class="menu">
+            <div class="left-menu">
+                {% if login %} 
+                <ul class="top-icon">
+                    <a href="/auth/logout"><i class="fa fa-sign-out"></i></a>
+                    <a href="/profile" class="user"><img src="{{ img }}" /></a>
+                    <a><i class="fa conf fa-cog"></i></a>
+                </ul>
+                {% endif %}
+                <ul class="bottom-icon">
+                    <a href="" title="그룹 깃허브" class="link">
+                        <i class="fa hub fa-github"></i></a>
+                    <a href="" title="멤버 목록" class="link"><i class="fa fa-users"></i></a>
+                </ul>
+            </div>
+            <div class="right-menu">
+                <div class="title">
+                    <h1><a href='/' style="font-family: 'Fascinate', cursive;">WLearn</a></h1>
+                </div>
+                <div class="menu-text">
+                    {% if not login %}
+                    <div class="notuser">
+                        <a href="/auth/login" class="login">로그인</a><a href="/auth/signup" class="signup">회원가입</a>
+                    </div>
+                    {% endif %}
+                    <a href="">
+                        <div>All</div>
+                    </a>
+                    <a href="">
+                        <div>공지사항</div>
+                    </a>
+                    <a href="">
+                        <div>JavaScript</div>
+                    </a>
+                    <a href="">
+                        <div>Node.Js</div>
+                    </a>
+                    <a href="">
+                        <div>MySQL</div>
+                    </a>
+                    <a href="">
+                        <div>학습링크모음</div>
+                    </a>
+                    <a href="">
+                        <div>추천강의/캠프</div>
+                    </a>
+                    <a href="">
+                        <div></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% block main %}{% endblock %}
+       
     </div>
-    </header>
-    {% block main %}{% endblock %}
-    <footer>
-    <div class="head">
-        <div>[공지] 사이트 유지보수 진행중입니다.</div>
-        <div><i class="fa fa-git-square"></i><i class="fa fa-instagram"></i><i style="margin-right:50px;"class="fa fa-facebook-official"></i></div>
-    </div>
-    <div class="bottom"></div>
-    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}{% endblock %}
-</body></html>
+</body>
 
- 
+</html>
