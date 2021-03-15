@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const app = express();
-const { sequelize } = require('./models');
+const { sequelize,Profile } = require('./models');
 const session = require('express-session');
 const favicon = require('serve-favicon'); 
 // Mysql 세션저장 
@@ -12,9 +12,9 @@ const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv'); 
 const passport = require('passport'); 
 const passportConfig = require('./passport'); 
+const cors = require('cors'); 
 
 // 라우터
-const indexRouter = require('./routes');
 const profileRouter = require('./routes/profile.js'); 
 const authRouter = require('./routes/auth.js');
 const linkRouter = require('./routes/link.js'); 
@@ -22,7 +22,6 @@ const projectRouter = require('./routes/project.js');
 const communityRouter = require('./routes/community.js'); 
  
 const nunjucks = require('nunjucks'); 
-
 // dotenv
 dotenv.config(); 
 
@@ -52,6 +51,17 @@ env.addFilter('dateform',function (str) {
     return `${ year}년 ${month} 월 ${ day } 일`;
 });
  
+env.addFilter('commentform',function (str) {
+    const date = new Date(str) 
+    const year = date.getFullYear();
+    const month = (date.getMonth() +1);
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds(); 
+    return `${ year}-${month}-${ day } ${hours}:${minutes}:${seconds}`;
+});
+
 
 
 
@@ -60,17 +70,23 @@ env.addFilter('dateform',function (str) {
 app.set('port', process.env.PORT || 8080);
 
 // morgan 
+app.use(cors('localhost:8001')); 
 app.use(morgan('dev'));
 // css,js 정적파일 경로 설정 
  
 // parser 
-app.use(express.json());
+app.use(express.json({
+    limit : "50mb",
+}));
 
 // form 데이터라도 urlincoded 로 보내는 경우에는 아래 미들웨어에서 처리해준다
 // enctype 이 multipart/form-data 인 경우에는 못바꿔줌
 // 이럴 때 multer 를 사용하면  multipart/form-data을 해석할 수 있다.
 // 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ 
+    extended: true,
+    limit : "50mb",
+}));
 // 
 app.use(express.static(path.join(__dirname,'public')));
 app.use('/img',express.static(path.join(__dirname,'uploads')));
@@ -101,13 +117,7 @@ app.use(passport.initialize());
 app.use(passport.session()); 
 passportConfig(); 
 // 세션 검증 미들웨어 
-app.use((req,res,next)=>{
-    if(req.session.user){
-        req.data = req.session.user;
-    }else{
-    }
-    next();
-})
+ 
 
 // 시퀄라이즈 모델 생성(연결)
 sequelize.sync({ force:false})
@@ -117,7 +127,30 @@ sequelize.sync({ force:false})
     
 // 라우터 등록
 // 메인페이지
-app.use('/',indexRouter); 
+app.use( async (req,res,next)=>{
+    req.isLogin =false;
+    req.profile = { img:null };
+    try{
+    if(req.isAuthenticated()){
+        const profile = await Profile.findOne({ where : { UserId: req.user.id}}); 
+        if(!profile){
+            await Profile.create({
+                intro: '자기소개가 없습니다',
+                UserId : req.user.id,
+                img: '/img/user.png'
+            });
+        }
+        req.profile=await Profile.findOne({where :{ UserId: req.user.id}});
+        req.isLogin =true; 
+    }
+    next();
+    }catch(err){
+        console.log(err);
+        next(err); 
+    }
+})
+
+app.get('/',(req,res) => res.redirect('/community'))
 app.use('/',profileRouter)
 app.use('/',linkRouter);
 app.use('/',projectRouter);
