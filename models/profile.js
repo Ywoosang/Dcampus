@@ -2,14 +2,16 @@ module.exports = (sequelize,DataTypes) => {
     let profile = sequelize.define('Profile',{
         intro : {
             type : DataTypes.TEXT,
+            allowNull:false
         },
-        // img : {
-        //     type : DataTypes.BLOB('long'),
-        // },
+        img : {
+            type : DataTypes.TEXT,
+            allowNull:false
+        },
     });
     // 
     profile.associate = function(models) {
-        profile.belongsTo(models.User,{ forignKey :{name: 'userId',allowNull:false},onDelete:'CASCADE'}); 
+        profile.belongsTo(models.User,{ foreignKey :{allowNull:false},onDelete:'CASCADE'}); 
     }; 
     // 
     return profile; 
