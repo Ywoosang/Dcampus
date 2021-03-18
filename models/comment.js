@@ -7,6 +7,10 @@ module.exports = (sequelize,DataTypes)=> {
         user : {
             type : DataTypes.STRING(10),
             allowNull : false,
+        },
+        recommend : {
+            type : DataTypes.INTEGER(11),
+            defaultValue :0,
         }
         // createdAt, updatadAt 자동으로 설정됨
     });
@@ -14,6 +18,7 @@ module.exports = (sequelize,DataTypes)=> {
     comment.associate = function (models){
         comment.belongsTo(models.User,{ forignKey :{allowNull:false},onDelete:'CASCADE'}); 
         comment.belongsTo(models.Post,{ forignKey :{ allowNull:false}});
+        comment.hasMany(models.Like);
     };
     //
     return comment;   
