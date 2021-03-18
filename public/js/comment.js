@@ -81,27 +81,19 @@ window.onload = async() =>{
         const isLike = res.data.like;
         const likeBtn = document.querySelector('.like');
         const disLikeBtn = document.querySelector('.dislike');
-        console.log(isLike);
         // 추천을 눌렀을 경우 
         if(isLike){
-            console.log('추천 누른 상태',isLike);
             likeBtn.classList.add('cancel');
-            cancelEvent();
+            postCancel();
         // 비추천을 눌렀을 경우
         } else if(isLike === false){
-            console.log('비추천 누른 상태',isLike);
             disLikeBtn.classList.add('cancel');
-            cancelEvent();
+            postCancel();
         // 추천/비추천 모두 누르지 않은 경우
         } else{
-            console.log('아직 누르지 않은 상태',isLike);
-            likeBtn.classList.add('like-btn');
-            disLikeBtn.classList.add('dislike-btn'); 
-            likeEvent()
-            disLikeEvent() 
+            postLike()
+            postDisLike() 
         }
-        
-        console.log('세팅완료');
     });
     const comments = document.getElementsByClassName('comment');
     // 로드 => 현재 상태 가져오기
@@ -138,45 +130,44 @@ window.onload = async() =>{
 const likeNum = document.querySelector('.num');
  
 // 게시글 추천 구현
-const likeEvent = () => {
-    const like = document.querySelector('.like-btn'); 
-    like.addEventListener('click',()=>{
+const postLike = () => {
+    const likeBtn = document.querySelector('.like');
+    const disLikeBtn = document.querySelector('.dislike');
+    likeBtn.addEventListener('click',()=>{
         axios.get(`${window.location.href}/1`)
         .then((res)=>{
             likeNum.innerText = res.data.recommend;
             console.log( res.data.recommend);
-            like.classList.add('cancel');
-            like.classList.remove('like-btn');
-            const disLikeBtn = document.querySelector('.dislike');
-            disLikeBtn.classList.remove('dislike-btn');
-            const elClone = like.cloneNode(true);
-            like.parentNode.replaceChild(elClone, like);
-            cancelEvent();
-            
+            likeBtn.classList.add('cancel');
+            const elClone = likeBtn.cloneNode(true);
+            likeBtn.parentNode.replaceChild(elClone, likeBtn);
+            const disLikeClone = disLikeBtn.cloneNode(true);
+            disLikeBtn.parentNode.replaceChild(disLikeClone,disLikeBtn);
+            postCancel();
         })
     })
     
 }
 
-const disLikeEvent = ()=>{
-    const disLike = document.querySelector('.dislike-btn'); 
-    disLike.addEventListener('click',()=>{
+const postDisLike = ()=>{
+    const likeBtn = document.querySelector('.like');
+    const disLikeBtn = document.querySelector('.dislike');
+    disLikeBtn.addEventListener('click',()=>{
         axios.get(`${window.location.href}/0`)
         .then((res)=>{
             likeNum.innerText = res.data.recommend;
             console.log( res.data.recommend);
-            disLike.classList.add('cancel')
-            disLike.classList.remove('dislike-btn')
-            const likeBtn = document.querySelector('.like');
-            likeBtn.classList.remove('like-btn');
-            const elClone = disLike.cloneNode(true);
-            disLike.parentNode.replaceChild(elClone,disLike);
-            cancelEvent();
+            disLikeBtn.classList.add('cancel')
+            const elClone = disLikeBtn.cloneNode(true);
+            disLikeBtn.parentNode.replaceChild(elClone,disLikeBtn);
+            const likeClone = likeBtn.cloneNode(true);
+            likeBtn.parentNode.replaceChild(likeClone,likeBtn); 
+            postCancel();
         })
     })
 }
 
-const cancelEvent = () => {
+const postCancel = () => {
     const cancel = document.querySelector('.cancel') 
     cancel.addEventListener('click',()=>{
         if(confirm('취소하시겠습니까?')){
@@ -187,12 +178,8 @@ const cancelEvent = () => {
                 cancel.classList.remove('cancel');
                 const elClone = cancel.cloneNode(true);
                 cancel.parentNode.replaceChild(elClone,cancel);
-                const likeBtn = document.querySelector('.like');
-                const disLikeBtn = document.querySelector('.dislike');
-                likeBtn.classList.add('like-btn'); 
-                disLikeBtn.classList.add('dislike-btn');
-                likeEvent();
-                disLikeEvent();
+                postLike();
+                postDisLike();
             })
         }
     })
