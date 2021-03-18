@@ -17,21 +17,23 @@
                 <div class="li-date">
                     <p>작성자: {{ post.user }}</p>
                     <p>{{ post.createdAt | dateform }}</p>
-                    <p><i class="fa fa-commenting comments"></i>{{ comments | length }}</p>
+                    <p><i class="fa fa-eye"></i>{{ post.views }}<i style="margin-left:10px;" class="fa fa-commenting comments"></i>{{ comments | length }}</p>
                 </div>
             </div>
         </div>
         <div class="post-content">
             <div class="content">{{ post.content | safe }}</div>
             <div class="post-rec">
-                <div class="like"><i class="fa fa-caret-up"></i></div>
-                <div class="num">15</div>
+                <!-- 추천수 -->
+                <div class="like"  ><i class="fa fa-caret-up"></i></div>
+                <div class="num">{{ post.recommend }}</div>
                 <div class="dislike"><i class="fa fa-caret-down"></i></div>
             </div>
         </div>
     </div>
     {% for comment in comments %}
     <div class="comment">
+        <input type="hidden" value="{{ comment.id }}" disabled>
         <div class="com-left">
             <div class="list-right">
                 <div class="li-img">
@@ -47,8 +49,9 @@
         </div>
         <div class="com-right">
             <div class="post-rec">
+                <!-- 추천수  -->
                 <div class="like"><i class="fa fa-caret-up"></i></div>
-                <div class="num">15</div>
+                <div class="likeNum coml">{{ comment.recommend }}</div>
                 <div class="dislike"><i class="fa fa-caret-down"></i></div>
             </div>
         </div>
@@ -74,85 +77,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script>
-    $('#summernote').summernote({
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['fontname', ['fontname']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['insert', ['link', 'picture']],
-            ['view', ['fullscreen', 'codeview', 'help']],
-        ],
-        minHeight: 100,
-        maxHeight: 600,
-        focus: true,
-        callbacks: {
-            onImageUpload: function (files) {
-                sendFile(files[0]);
-            }
-        }
-
-    });
-    function sendFile(file) {
-        var data = new FormData();
-        data.append("file", file);
-        console.log(file);
-        $.ajax({
-            type: "POST",
-            url: "/community/upload/img",
-            type: 'POST',
-            data: data,
-            contentType: false,
-            processData: false, // Don't process the files
-            success: function (data) {
-                console.log(data);
-                console.log(data.url)
-                const node = document.createElement('p');
-                const img = document.createElement('img');
-                img.src = data.url;
-                img.style.width = "100%";
-                const br = document.createElement('br');
-                node.appendChild(img);
-                node.appendChild(br);
-                $('#summernote').summernote("insertNode", node);
-            }
-        });
-    }
-    const commentContent = document.getElementsByClassName('comment-create')[0];
-    const submitButton = document.getElementsByClassName('comment-submit')[0];
-    submitButton.addEventListener('click', () => {
-        console.log(commentContent.value);
-        if (commentContent.value.trim().length == 0) alert('값을 입력해 주세요');
-        else {
-            axios.post(window.location.href, {
-                data: {
-                    content: commentContent.value,
-                }
-            }).then((res) => {
-                location.reload();
-            }).catch((err) => console.log(err))
-        }
-    })
-
-    
-    const setScrollEvent = () => {
-        document.addEventListener('scroll',() => {
-            const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-            if(localStorage.getItem('scroll')){
-                localStorage.removeItem('scroll'); 
-            }; 
-            console.log(scrollPosition)
-            localStorage.setItem('scroll',scrollPosition);
-        });
-    }
-    window.onload = () =>{
-        const position = localStorage.getItem('scroll');
-        console.log(position);
-        window.scrollTo(0,position);
-        setScrollEvent();
-    }
-
-</script>
+<script src="/js/comment.js"></script>
 {% endblock %}
