@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const app = express();
-const { sequelize,Profile } = require('./models');
+const { sequelize } = require('./models');
 const session = require('express-session');
 const favicon = require('serve-favicon'); 
 // Mysql 세션저장 
@@ -15,12 +15,15 @@ const passportConfig = require('./passport');
 const cors = require('cors'); 
 
 // 라우터
-const profileRouter = require('./routes/profile.js'); 
-const authRouter = require('./routes/auth.js');
-const linkRouter = require('./routes/link.js'); 
-const projectRouter = require('./routes/project.js'); 
-const communityRouter = require('./routes/community.js'); 
- 
+const profileRouter = require('./routes/profile'); 
+const authRouter = require('./routes/auth');
+const linkRouter = require('./routes/link'); 
+const projectRouter = require('./routes/project'); 
+const communityRouter = require('./routes/community'); 
+const userRouter = require('./routes/user'); 
+const { userCheck } = require('./routes/middleware');
+
+// nunjucks 
 const nunjucks = require('nunjucks'); 
 // dotenv
 dotenv.config(); 
@@ -61,9 +64,6 @@ env.addFilter('commentform',function (str) {
     const seconds = date.getSeconds(); 
     return `${ year}-${month}-${ day } ${hours}:${minutes}:${seconds}`;
 });
-
-
-
 
 
 // port 변수 설정 
@@ -127,28 +127,7 @@ sequelize.sync({ force:false})
     
 // 라우터 등록
 // 메인페이지
-app.use( async (req,res,next)=>{
-    req.isLogin =false;
-    req.profile = { img:null };
-    try{
-    if(req.isAuthenticated()){
-        const profile = await Profile.findOne({ where : { UserId: req.user.id}}); 
-        if(!profile){
-            await Profile.create({
-                intro: '자기소개가 없습니다',
-                UserId : req.user.id,
-                img: '/img/user.png'
-            });
-        }
-        req.profile=await Profile.findOne({where :{ UserId: req.user.id}});
-        req.isLogin =true; 
-    }
-    next();
-    }catch(err){
-        console.log(err);
-        next(err); 
-    }
-})
+app.use(userCheck);
 
 app.get('/',(req,res) => res.redirect('/community'))
 app.use('/',profileRouter)
@@ -156,6 +135,7 @@ app.use('/',linkRouter);
 app.use('/',projectRouter);
 app.use('/community',communityRouter);
 app.use('/auth',authRouter); 
+app.use('/user',userRouter); 
 
 // 404 처리 
 app.use((req, res, next) => {
@@ -171,7 +151,7 @@ app.use((err, req, res, next) => {
 
 // 서버 실행
 app.listen(app.get('port'), () => {
-    console.log('express start');
+    console.log(`server running on ${app.get('port')}`);
 });
 
 
