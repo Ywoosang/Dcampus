@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-const { User } = require('../models');
+const { User,sequelize } = require('../models');
 module.exports = () => {
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
@@ -16,13 +16,22 @@ passport.use(new GitHubStrategy({
               if(user) {
                   done(null,user); 
               }else {
-                  console.log(profile);
+                  const email = profile._json.html_url;
                   const newUser = await User.create({
-                    email : profile._json.html_url,
+                    email,
                     name : profile.username,
                     authId : profile.id,
                     provider : 'github'
                   });
+                  await sequelize.query(`
+                    insert into Profiles (intro,UserId,img,createdAt,updatedAt) 
+                    values (
+                        '자기소개가 없습니다',
+                        (select id from Users where email='${email}'),
+                        '/img/user.png',
+                        NOW(),
+                        NOW()
+                    );`)
                   done(null,newUser); 
               }
       } catch(err){
