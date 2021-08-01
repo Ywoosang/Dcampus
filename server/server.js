@@ -6,45 +6,16 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
-const multerS3 = require('multer-s3');
 const dbconfig = require('./config/config.js');
-const multer = require('multer'); 
 // const passportConfig = require('./passport');
 const cors = require('cors');
-const AWS = require('aws-sdk');
-
-AWS.config.update({
-    region: 'ap-northeast-2',
-});
-
-const storage = multerS3({
-    s3: new AWS.S3(),
-    bucket: 'ywoosang-s3',
-    async key(req, file, cb) {
-        try {
-            const filePathName = `${Date.now()}-${file.originalname}`;
-            cb(null, filePathName);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-})
-
-const upload = multer({
-    storage
-});
-exports.upload = upload;
-
-
-
-
 // 라우터
-const postRouter = require('./routes/post.js')
-// const profileRouter = require('./routes/profile.js');
-// const authRouter = require('./routes/auth.js');
-// const linkRouter = require('./routes/link.js');
-// const communityRouter = require('./routes/community.js');
+const postRouter = require('./routes/post.js'); 
+const commentRouter = require('./routes/comment.js'); 
+const authRouter = require('./routes/auth.js')
+require('dotenv').config()  
 
+ 
 
 const app = express();
 // CORS 에서는 기본적으로 쿠키를 request headers 에 넣어주지 않기 때문에
@@ -63,7 +34,7 @@ app.set('port', process.env.PORT || 8080);
 app.use(morgan('dev'));
 // css,js 정적파일 경로 설정 
 
-// parser 
+// request body 에서 json 사용가능  
 app.use(express.json({
     limit: "50mb",
 }));
@@ -96,25 +67,12 @@ app.use(session({
 // app.use(passport.initialize());
 // app.use(passport.session());
 // passportConfig();
+ 
 
-
-
-
-
-// 라우터 등록
-// 메인페이지
-app.post('/api/test', (req, res) => {
-    const age = req.body.age;
-    const name = req.body.name;
-    res.json({ msg: 'success', age, name })
-})
-
-
-// app.use('/', profileRouter);
-// app.use('/', linkRouter);
-// app.use('/community', communityRouter);
-// app.use('/auth', authRouter);
+// https://www.youtube.com/watch?v=mbsmsi7l3r4
+app.use('/',authRouter); 
 app.use('/post', postRouter);
+app.use('/comment',commentRouter);
 
 app.get('/', (req, res) => {
     res.send('API 서버입니다.')
@@ -130,6 +88,7 @@ app.use((err, req, res, next) => {
     console.error(err);
     res.send('일시적인 오류가 발생했습니다.');
     // 로깅 구현
+    
 });
 
 // 서버 실행
