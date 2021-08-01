@@ -1,94 +1,59 @@
-// const express = require('express');
-// const passport = require('passport');
-// const router = express.Router();
-// const bcrypt = require('bcrypt');
-// const { User, Profile } = require('../models');
-// // 로컬 로그인
-// router.route('/signup')
-//     .get((req, res) => {
-//         return res.render('signup');
-//     })
-//     .post(async (req, res, next) => {
-//         const name = req.body.name;
-//         const email = req.body.email;
-//         const password = req.body.password;
-//         try {
-//             // 기존에 가입된 사용자가 있는지 확인
-//             const user = await User.findOne({ where: { email } })
-//             console.log(user);
-//             if (user) {
-//                 return res.redirect(`/auth/signup?signupError=${'이미 존재하는회원입니다'}`);
-//             }
-//             const hash = await bcrypt.hash(password, 12);
-//             await User.create({
-//                 name,
-//                 email,
-//                 password: hash
-//             })
-//             const newUser = await User.findOne({where :{ email }})
-//             await Profile.create({
-//                 intro : '자기소개가 없습니다',
-//                 img : '/img/user.png',
-//                 UserId : newUser.id
-//             })
-//             res.json({ message : 'signup' });
-//         } catch (err) {
-//             console.error(err);
-//             next(err);
-//         }
-//     });
+const express = require('express');
+const router = express.Router();
+const { generateAccessToken }= require('../middleware/auth.js');
+const jwt = require('jsonwebtoken')
 
-// router.route('/login')
-//     .post((req, res, next) => {
-//         passport.authenticate('local', (authError, user, info) => {
-//             if (authError) {
-//                 console.error(authError);
-//                 return next(authError);
-//             }
-//             if (!user) {
-//                 return res.json('error');
-//             }
-//             return req.login(user, (loginError) => {
-//                 if (loginError) {
-//                     console.error(loginError);
-//                     return next(loginError);
-//                 }
-//                 console.log(user);
-//                 return res.json({ user });
-//             });
-//         })(req, res, next)
-//     });
+const refreshTokens = [];
 
-// // 깃허브 로그인
-// router.get('/github', passport.authenticate('github'));
-// router.get('/github/callback',
-//     passport.authenticate('github', { failureRedirect: '/' }),
-//     function (req, res) {
-//         res.json({ login:true});
-//     });
+// 인증 관련 미들웨어 
+router.post('/login',(req,res)=>{
+    // JSON 웹 토큰 생성 
+    // 사용자 이름이 올바르게 인증되었다고 가정하고 전달
+    const username = req.body.username;
+    console.log(username,process.env.ACCESS_TOKEN_SECRET); 
+    // 서명 사용
+    const user = { name : username }
+      // 직렬화하고 싶은 페이로드, 시크릿키
+    const accessToken =  generateAccessToken(user); 
+    const refreshToken = jwt.sign(user,process.env.REFRESH_TOKEN_SECRET); 
+    // accessToken 에 사용자 정보를 저장 
+
+    // refreshTokens 에 정보 저장
+    refreshTokens.push(refreshToken); 
+    res.json({ accessToken,refreshToken}); 
+});
+
+// 사용자가 token 생성할 때마다 매번 토큰이 저장되므로
+// 쌓이지 않기 위해 없애줘야한다.
+router.delete('/logout',(req,res) => {
+    // 해당 토큰 없애기 (데이터베이스 등)
+    refreshTokens.filter(token => token !== req.body.token)
+    res.sendStatus(204)
+})
+
+ 
+router.post('/token',(req,res)=>{
+    // check to see if we already have a refresh token that exists
+    // for that 
+    // so normally want to store refresh tokens in some form of database
+    // or some form of Redis cache 
+    // 여기서는 변수에 담음 
+    const refreshToken = req.body.token;
+    if(refreshToken === null) return res.sendStatus(401);
+    // 발급한 refresh token 이 아닐 때 
+    if(!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
+    jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET,(err,user)=>{
+        if(err) return res.sendStatus(403);
+        // user object actually contains additional information
+        // such as issue that date of our token
+        // so we actually need to get just the name
+        const accessToken = generateAccessToken({name: user.name }); 
+        res.json({ accessToken });
+    });
+});
+
+// 24 분 부터
 
 
-// router.get('/naver', passport.authenticate('naver'));
-// router.get('/naver/callback',
-//     passport.authenticate('naver', { failureRedirect: '/' }),
-//     function (req, res) {
-//         res.json({ login:true});
-//     });
 
-// // 카카오 로그인
-// router.get('/kakao', passport.authenticate('kakao'));
-// router.get('/kakao/callback', passport.authenticate('kakao', {
-//     failureRedirect: '/',
-// }), (req, res) => {
-//     res.json({ login:true})
-// });
-
-// // 로그아웃
-// router.get('/logout', (req, res) => {
-//     console.log('로그아웃됨');
-//     req.logout();
-//     req.session.destroy();
-//     res.json({ logout : true});
-// });
-
-// module.exports = router;
+module.exports = router;
