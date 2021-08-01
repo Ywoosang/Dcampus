@@ -1,0 +1,29 @@
+GET http://localhost:8001/comment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdFVzZXIxIiwiaWF0IjoxNjI3Nzk4Nzg2LCJleHAiOjE2Mjc3OTg4MTZ9.lOBbmDgkDtUm8G4VDo-00Wlr-j2-gSu9OEZuAtUy0Ks
+
+###
+POST http://localhost:8001/login
+Content-Type: application/json
+
+{
+    "username": "TestUser1",
+    "info" : "TestInfo"
+}
+
+###
+POST http://localhost:8001/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdFVzZXIxIiwiaWF0IjoxNjI3Nzk4NzY5fQ.lA8ao8QqtU3wahB4i6SwG2hIHIx9ufO6wHceRgcaGgM"
+}
+
+###
+DELETE http://localhost:8001/logout
+Content-Type: application/json
+
+{
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdFVzZXIxIiwiaWF0IjoxNjI3Nzk4Nzg2LCJleHAiOjE2Mjc3OTg4MTZ9.lOBbmDgkDtUm8G4VDo-00Wlr-j2-gSu9OEZuAtUy0Ks"
+}
+
+
